@@ -1,8 +1,13 @@
-import MainPage from "../../pages/main/main.tsx";
+import MainPage from '../../pages/main/main.tsx';
 
-function App(): JSX.Element {
+type AppTotalOffersProps = {
+  totalOffers: number;
+}
+
+
+function App({totalOffers}: AppTotalOffersProps): JSX.Element {
   return (
-    <MainPage />
+    <MainPage totalOffers = {totalOffers}/>
   );
 }
 
