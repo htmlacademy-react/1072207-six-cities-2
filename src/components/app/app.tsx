@@ -1,13 +1,12 @@
 import MainPage from '../../pages/main/main.tsx';
 
-type AppTotalOffersProps = {
-  totalOffers: number;
-}
+const DataCities = {
+  TotalOffers: 5
+};
 
-
-function App({totalOffers}: AppTotalOffersProps): JSX.Element {
+function App(): JSX.Element {
   return (
-    <MainPage totalOffers = {totalOffers}/>
+    <MainPage totalOffers={DataCities.TotalOffers}/>
   );
 }
 

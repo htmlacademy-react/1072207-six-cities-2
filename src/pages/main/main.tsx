@@ -1,9 +1,31 @@
 import PlaceCard from '../../components/place-card/place-card.tsx';
+import React from 'react';
 
-type MainTotalOffersProps = {
+type MainProps = {
   totalOffers: number;
 }
-function MainPage({totalOffers}: MainTotalOffersProps): JSX.Element {
+
+type Card = {
+  id: number;
+  content: JSX.Element;
+}
+
+function MainPage({totalOffers}: MainProps): JSX.Element {
+  const cardArr: Card[] = [];
+
+  function getCardsArr(number: number) {
+    for (let i = 0; i < number; i++) {
+      cardArr.push(
+        {
+          id: i + 1,
+          content: <PlaceCard />,
+        }
+      );
+    }
+  }
+
+  getCardsArr(totalOffers);
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -111,11 +133,10 @@ function MainPage({totalOffers}: MainTotalOffersProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
-                <PlaceCard />
+
+                {
+                  cardArr.map((item) => <React.Fragment key={item.id}>{item.content}</React.Fragment>)
+                }
               </div>
             </section>
             <div className="cities__right-section">
