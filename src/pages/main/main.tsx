@@ -10,7 +10,7 @@ type Card = {
   content: JSX.Element;
 }
 
-function MainPage({totalOffers}: MainProps): JSX.Element {
+function Main({totalOffers}: MainProps): JSX.Element {
   const cardArr: Card[] = [];
 
   function getCardsArr(number: number) {
@@ -149,4 +149,4 @@ function MainPage({totalOffers}: MainProps): JSX.Element {
   );
 }
 
-export default MainPage;
+export default Main;

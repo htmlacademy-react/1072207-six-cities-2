@@ -20,7 +20,15 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
+    // Добавляем директорию откуда будут строиться пути (использование алиасов)
+    "baseUrl": "src"
   },
   "include": ["src", "vite.config.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+
+  // Добавляем алиасы для путей
+  "paths": {
+    "pages/*": ["pages/*"],
+    "components/*": ["components/*"],
+    }
 }

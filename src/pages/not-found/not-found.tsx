@@ -1,10 +1,11 @@
 import {Link} from 'react-router-dom';
+import styles from './not-found.module.css';
 
 function NotFound(): JSX.Element {
   return (
-    <div className="container" style={{textAlign: 'center', marginTop: 50}}>
+    <div className={styles.container}>
       <h1>404 Not Found</h1>
-      <Link to="/" style={{padding: 20}}>Вернуться на главную</Link>
+      <Link to="/" className={styles.link}>Вернуться на главную</Link>
     </div>
   );
 }
