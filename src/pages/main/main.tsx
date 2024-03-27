@@ -1,30 +1,18 @@
-import PlaceCard from '../../components/place-card/place-card.tsx';
-import React from 'react';
+// import PlaceCard from '../../components/place-card/place-card.tsx';
+// import React from 'react';
+import {OfferT} from 'mocks/offers.ts';
+import OffersList from 'components/offers-list/offers-list.tsx';
 
 type MainProps = {
-  totalOffers: number;
+  offers: OfferT[];
 }
 
-type Card = {
-  id: number;
-  content: JSX.Element;
-}
+function Main({offers}: MainProps): JSX.Element {
+  // todo возможно стоит передавать из листа предложений
+  // Если выполнять сортировку там то и количество предложений
+  // должно идти после сортировки
+  const numberCards: number = offers.length;
 
-function Main({totalOffers}: MainProps): JSX.Element {
-  const cardArr: Card[] = [];
-
-  function getCardsArr(number: number) {
-    for (let i = 0; i < number; i++) {
-      cardArr.push(
-        {
-          id: i + 1,
-          content: <PlaceCard />,
-        }
-      );
-    }
-  }
-
-  getCardsArr(totalOffers);
 
   return (
     <div className="page page--gray page--main">
@@ -106,7 +94,7 @@ function Main({totalOffers}: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{totalOffers} places to stay in Amsterdam</b>
+              <b className="places__found">{numberCards} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>Popular
@@ -132,12 +120,7 @@ function Main({totalOffers}: MainProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-
-                {
-                  cardArr.map((item) => <React.Fragment key={item.id}>{item.content}</React.Fragment>)
-                }
-              </div>
+              <OffersList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"/>

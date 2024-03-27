@@ -28,7 +28,8 @@
 
   // Добавляем алиасы для путей
   "paths": {
+    "src/*": ["src/*"],
     "pages/*": ["pages/*"],
-    "components/*": ["components/*"],
-    }
+    "components/*": ["components/*"]
+  }
 }
