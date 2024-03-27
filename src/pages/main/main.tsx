@@ -1,8 +1,9 @@
 import PlaceCard from '../../components/place-card/place-card.tsx';
 import React from 'react';
+import {OfferT} from 'mocks/offers.ts';
 
 type MainProps = {
-  totalOffers: number;
+  offers: OfferT[];
 }
 
 type Card = {
@@ -10,21 +11,26 @@ type Card = {
   content: JSX.Element;
 }
 
-function Main({totalOffers}: MainProps): JSX.Element {
+function Main({offers}: MainProps): JSX.Element {
   const cardArr: Card[] = [];
+  const numberCards: number = offers.length;
 
   function getCardsArr(number: number) {
+    // todo возможно заменить на использование map почитать но позже, при рефакторинге.
     for (let i = 0; i < number; i++) {
+      // console.log(offers.length);
+
       cardArr.push(
         {
+          // todo заменить id на из офера - его айди, но можно ли
           id: i + 1,
-          content: <PlaceCard />,
+          content: <PlaceCard offer = {offers[i]}/>,
         }
       );
     }
   }
 
-  getCardsArr(totalOffers);
+  getCardsArr(numberCards);
 
   return (
     <div className="page page--gray page--main">
@@ -106,7 +112,7 @@ function Main({totalOffers}: MainProps): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{totalOffers} places to stay in Amsterdam</b>
+              <b className="places__found">{numberCards} places to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>Popular
