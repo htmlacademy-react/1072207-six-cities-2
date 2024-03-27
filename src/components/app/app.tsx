@@ -9,20 +9,14 @@ import PrivateRoute from 'components/private-route/private-route.tsx';
 import Favorites from 'pages/favorites/favorites.tsx';
 
 import {OfferT} from 'mocks/offers.ts';
-import {ReviewT} from 'mocks/reviews.ts';
-
-const DataCities = {
-  TotalOffers: 5
-};
+// import {ReviewT} from 'mocks/reviews.ts';
 
 type AppProps = {
   offers: OfferT[];
-  reviews: ReviewT[];
+  // reviews: ReviewT[];
 }
 
-function App({offers, reviews}: AppProps): JSX.Element {
-// console.log(offers.length);
-
+function App({offers}: AppProps): JSX.Element {
 
   return (
     <BrowserRouter>
@@ -30,7 +24,7 @@ function App({offers, reviews}: AppProps): JSX.Element {
         <Route path={AppRoute.Main}
           element={
             <Main
-              totalOffers={DataCities.TotalOffers}
+              // totalOffers={DataCities.TotalOffers}
               offers={offers}
             />
           }

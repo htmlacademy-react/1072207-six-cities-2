@@ -2,13 +2,14 @@ import {OfferT} from 'mocks/offers.ts';
 
 type PlaceCardProps = {
   offer: OfferT;
+  giveActiveCard: () => void;
 }
 
-function PlaceCard({offer}: PlaceCardProps): JSX.Element {
+function PlaceCard({offer, giveActiveCard}: PlaceCardProps): JSX.Element {
   const rating: number = offer.rating * 2;
 
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseOver={giveActiveCard}>
       {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">

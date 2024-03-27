@@ -1,36 +1,18 @@
-import PlaceCard from '../../components/place-card/place-card.tsx';
-import React from 'react';
+// import PlaceCard from '../../components/place-card/place-card.tsx';
+// import React from 'react';
 import {OfferT} from 'mocks/offers.ts';
+import OffersList from 'components/offers-list/offers-list.tsx';
 
 type MainProps = {
   offers: OfferT[];
 }
 
-type Card = {
-  id: number;
-  content: JSX.Element;
-}
-
 function Main({offers}: MainProps): JSX.Element {
-  const cardArr: Card[] = [];
+  // todo возможно стоит передавать из листа предложений
+  // Если выполнять сортировку там то и количество предложений
+  // должно идти после сортировки
   const numberCards: number = offers.length;
 
-  function getCardsArr(number: number) {
-    // todo возможно заменить на использование map почитать но позже, при рефакторинге.
-    for (let i = 0; i < number; i++) {
-      // console.log(offers.length);
-
-      cardArr.push(
-        {
-          // todo заменить id на из офера - его айди, но можно ли
-          id: i + 1,
-          content: <PlaceCard offer = {offers[i]}/>,
-        }
-      );
-    }
-  }
-
-  getCardsArr(numberCards);
 
   return (
     <div className="page page--gray page--main">
@@ -138,12 +120,7 @@ function Main({offers}: MainProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-
-                {
-                  cardArr.map((item) => <React.Fragment key={item.id}>{item.content}</React.Fragment>)
-                }
-              </div>
+              <OffersList offers={offers}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"/>

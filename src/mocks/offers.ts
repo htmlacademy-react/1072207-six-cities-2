@@ -40,7 +40,7 @@ export type OfferT = {
 
 export const offers: OfferT[] = [
   {
-    id: '6af6f711-c28d-4121-82cd-e0b462a27f00',
+    id: 'КАРТОЧКА 1',
     title: 'Beautiful & luxurious studio at great location111',
     type: 'apartment',
     price: 120,
@@ -76,7 +76,7 @@ export const offers: OfferT[] = [
     maxAdults: 4
   },
   {
-    id: '6af6f711-c28d-4121-82cd-e0b462a27f02',
+    id: 'КАРТОЧКА 2',
     title: 'Beautiful & luxurious studio at great location',
     type: 'apartment',
     price: 130,
@@ -112,7 +112,7 @@ export const offers: OfferT[] = [
     maxAdults: 4
   },
   {
-    id: '6af6f711-c28d-4121-82cd-e0b462a27f03',
+    id: 'КАРТОЧКА 3',
     title: 'Beautiful & luxurious studio at great location',
     type: 'apartment',
     price: 150,
@@ -148,7 +148,7 @@ export const offers: OfferT[] = [
     maxAdults: 4
   },
   {
-    id: '6af6f711-c28d-4121-82cd-e0b462a27f04',
+    id: 'КАРТОЧКА 4',
     title: 'Beautiful & luxurious studio at great location',
     type: 'apartment',
     price: 160,
