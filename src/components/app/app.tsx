@@ -5,26 +5,22 @@ import Main from 'pages/main/main.tsx';
 import Login from 'pages/login/login.tsx';
 import Offer from 'pages/offer/offer.tsx';
 import NotFound from 'pages/not-found/not-found.tsx';
-import PrivateRoute from 'components/private-route/private-route.tsx';
 import Favorites from 'pages/favorites/favorites.tsx';
+import PrivateRoute from 'components/private-route/private-route.tsx';
 
-import {OfferT} from 'mocks/offers.ts';
-// import {ReviewT} from 'mocks/reviews.ts';
+import {OfferFromList} from 'mocks/offers.ts';
 
-type AppProps = {
-  offers: OfferT[];
-  // reviews: ReviewT[];
+type AppProps={
+  offers: OfferFromList[];
 }
 
 function App({offers}: AppProps): JSX.Element {
-
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Main}
           element={
             <Main
-              // totalOffers={DataCities.TotalOffers}
               offers={offers}
             />
           }
@@ -34,7 +30,7 @@ function App({offers}: AppProps): JSX.Element {
         />
         <Route path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
               <Favorites />
             </PrivateRoute>
           }

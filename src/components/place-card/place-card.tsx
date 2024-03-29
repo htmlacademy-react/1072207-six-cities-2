@@ -1,24 +1,24 @@
-import {OfferT} from 'mocks/offers.ts';
+import {OfferFromList} from 'mocks/offers.ts';
 
-type PlaceCardProps = {
-  offer: OfferT;
-  giveActiveCard: () => void;
+type PlaceCardProps={
+  offer: OfferFromList;
+  setCard: () => void;
 }
 
-function PlaceCard({offer, giveActiveCard}: PlaceCardProps): JSX.Element {
-  const rating: number = offer.rating * 2;
+function PlaceCard({offer, setCard}: PlaceCardProps): JSX.Element {
+  const rating = Math.round(offer.rating) * 2;
 
   return (
-    <article className="cities__card place-card" onMouseOver={giveActiveCard}>
+    <article className="cities__card place-card" onMouseOver={setCard}>
       {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img
             className="place-card__image"
-            src={offer.images[0]}
+            src={offer.previewImage}
             width={260}
             height={200}
-            alt={offer.description}
+            alt={offer.title}
           />
         </a>
       </div>
@@ -53,7 +53,7 @@ function PlaceCard({offer, giveActiveCard}: PlaceCardProps): JSX.Element {
             {offer.title}
           </a>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
   );

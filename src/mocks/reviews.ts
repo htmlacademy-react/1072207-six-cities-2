@@ -1,11 +1,11 @@
 
-type ReviewUser = {
+type ReviewUser={
   name: string;
   avatarUrl: string;
   isPro: boolean;
 }
 
-export type ReviewT = {
+export type Review={
   id: string;
   date: string;
   user: ReviewUser;
@@ -13,7 +13,7 @@ export type ReviewT = {
   rating: number;
 }
 
-export const reviews: ReviewT[] = [
+export const reviews: Review[] = [
   {
     id: 'b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',
     date: '2019-05-08T14:13:56.569Z',

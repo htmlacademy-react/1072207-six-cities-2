@@ -1,24 +1,7 @@
-type OfferCity = {
-  name: string;
-  location: OfferLocation;
-}
+import {OfferCity} from 'mocks/offer.ts';
+import {OfferLocation} from 'mocks/offer.ts';
 
-type OfferLocation = {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-}
-
-// Как лучше указывать? todo
-// type OfferGoods = string[];
-
-type OfferHost = {
-  name: string;
-  avatarUrl: string;
-  isPro: boolean;
-}
-
-export type OfferT = {
+export type OfferFromList={
   id: string;
   title: string;
   type: string;
@@ -28,159 +11,100 @@ export type OfferT = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  description: string;
-  bedrooms: number;
-  // goods: OfferGoods; todo
-  goods: string[];
-  host: OfferHost;
-  images: string[];
-  maxAdults: number;
+  previewImage: string;
 }
 
-
-export const offers: OfferT[] = [
+export const offers: OfferFromList[] = [
   {
-    id: 'КАРТОЧКА 1',
-    title: 'Beautiful & luxurious studio at great location111',
-    type: 'apartment',
-    price: 120,
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8
+    'id': '08b677a7-132b-47e6-a796-837a389087e8',
+    'title': 'Wood and stone place',
+    'type': 'hotel',
+    'price': 264,
+    'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/15.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
       }
     },
-    location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
+    'location': {
+      'latitude': 48.868610000000004,
+      'longitude': 2.342499,
+      'zoom': 16
     },
-    isFavorite: false,
-    isPremium: true,
-    rating: 4,
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    bedrooms: 3,
-    goods: [
-      'Heating'
-    ],
-    host: {
-      name: 'Oliver Conner',
-      avatarUrl: 'img/apartment-01.jpg',
-      isPro: false
-    },
-    images: [
-      'img/apartment-01.jpg'
-    ],
-    maxAdults: 4
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 1.6
   },
   {
-    id: 'КАРТОЧКА 2',
-    title: 'Beautiful & luxurious studio at great location',
-    type: 'apartment',
-    price: 130,
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8
+    'id': '290a6e53-27db-42ba-b8e9-fa89b044819c',
+    'title': 'Canal View Prinsengracht',
+    'type': 'house',
+    'price': 268,
+    'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/18.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
       }
     },
-    location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
+    'location': {
+      'latitude': 48.858610000000006,
+      'longitude': 2.330499,
+      'zoom': 16
     },
-    isFavorite: false,
-    isPremium: true,
-    rating: 5,
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    bedrooms: 3,
-    goods: [
-      'Heating'
-    ],
-    host: {
-      name: 'Gustavo Fling',
-      avatarUrl: 'img/apartment-01.jpg',
-      isPro: false
-    },
-    images: [
-      'img/apartment-01.jpg'
-    ],
-    maxAdults: 4
+    'isFavorite': false,
+    'isPremium': true,
+    'rating': 2.7
   },
   {
-    id: 'КАРТОЧКА 3',
-    title: 'Beautiful & luxurious studio at great location',
-    type: 'apartment',
-    price: 150,
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8
+    'id': 'fc49a73f-2c52-4e0d-b22d-fc974971a66c',
+    'title': 'The Joshua Tree House',
+    'type': 'hotel',
+    'price': 317,
+    'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/1.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
       }
     },
-    location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
+    'location': {
+      'latitude': 48.834610000000005,
+      'longitude': 2.335499,
+      'zoom': 16
     },
-    isFavorite: false,
-    isPremium: false,
-    rating: 3,
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    bedrooms: 3,
-    goods: [
-      'Heating'
-    ],
-    host: {
-      name: 'Walter Wait',
-      avatarUrl: 'img/apartment-01.jpg',
-      isPro: false
-    },
-    images: [
-      'img/apartment-01.jpg'
-    ],
-    maxAdults: 4
+    'isFavorite': false,
+    'isPremium': true,
+    'rating': 3.9
   },
   {
-    id: 'КАРТОЧКА 4',
-    title: 'Beautiful & luxurious studio at great location',
-    type: 'apartment',
-    price: 160,
-    city: {
-      name: 'Amsterdam',
-      location: {
-        latitude: 52.35514938496378,
-        longitude: 4.673877537499948,
-        zoom: 8
+    'id': 'f2eccd30-b923-42ed-b6e6-ed19b01c4002',
+    'title': 'Waterfront with extraordinary view',
+    'type': 'room',
+    'price': 189,
+    'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/18.jpg',
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
       }
     },
-    location: {
-      latitude: 52.35514938496378,
-      longitude: 4.673877537499948,
-      zoom: 8
+    'location': {
+      'latitude': 48.85761,
+      'longitude': 2.358499,
+      'zoom': 16
     },
-    isFavorite: false,
-    isPremium: false,
-    rating: 4,
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
-    bedrooms: 3,
-    goods: [
-      'Heating'
-    ],
-    host: {
-      name: 'Max Pain',
-      avatarUrl: 'img/apartment-01.jpg',
-      isPro: false
-    },
-    images: [
-      'img/apartment-01.jpg'
-    ],
-    maxAdults: 4
-  }
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 1.3
+  },
 ];
