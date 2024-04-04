@@ -1,18 +1,4 @@
-
-type ReviewUser={
-  name: string;
-  avatarUrl: string;
-  isPro: boolean;
-}
-
-export type Review={
-  id: string;
-  date: string;
-  user: ReviewUser;
-  comment: string;
-  rating: number;
-}
-
+import {Review} from 'types/rewiew.ts';
 export const reviews: Review[] = [
   {
     id: 'b67ddfd5-b953-4a30-8c8d-bd083cd6b62a',

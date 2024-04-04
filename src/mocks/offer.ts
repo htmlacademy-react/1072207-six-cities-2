@@ -1,37 +1,4 @@
-export type OfferCity={
-  name: string;
-  location: OfferLocation;
-}
-
-export type OfferLocation={
-  latitude: number;
-  longitude: number;
-  zoom: number;
-}
-
-type OfferHost={
-  name: string;
-  avatarUrl: string;
-  isPro: boolean;
-}
-
-export type Offer={
-  id: string;
-  title: string;
-  type: string;
-  price: number;
-  city: OfferCity;
-  location: OfferLocation;
-  isFavorite: boolean;
-  isPremium: boolean;
-  rating: number;
-  description: string;
-  bedrooms: number;
-  goods: string[];
-  host: OfferHost;
-  images: string[];
-  maxAdults: number;
-}
+import {Offer} from 'types/offer.ts';
 
 export const offer: Offer = {
   id: '08b677a7-132b-47e6-a796-837a389087e8',

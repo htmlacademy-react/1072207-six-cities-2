@@ -1,18 +1,4 @@
-import {OfferCity} from 'mocks/offer.ts';
-import {OfferLocation} from 'mocks/offer.ts';
-
-export type OfferFromList={
-  id: string;
-  title: string;
-  type: string;
-  price: number;
-  city: OfferCity;
-  location: OfferLocation;
-  isFavorite: boolean;
-  isPremium: boolean;
-  rating: number;
-  previewImage: string;
-}
+import {OfferFromList} from 'types/offer.ts';
 
 export const offers: OfferFromList[] = [
   {
@@ -34,7 +20,7 @@ export const offers: OfferFromList[] = [
       'longitude': 2.342499,
       'zoom': 16
     },
-    'isFavorite': false,
+    'isFavorite': true,
     'isPremium': false,
     'rating': 1.6
   },

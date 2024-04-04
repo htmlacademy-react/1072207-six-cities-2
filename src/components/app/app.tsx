@@ -8,7 +8,7 @@ import NotFound from 'pages/not-found/not-found.tsx';
 import Favorites from 'pages/favorites/favorites.tsx';
 import PrivateRoute from 'components/private-route/private-route.tsx';
 
-import {OfferFromList} from 'mocks/offers.ts';
+import {OfferFromList} from 'types/offer.ts';
 
 type AppProps={
   offers: OfferFromList[];
@@ -18,30 +18,11 @@ function App({offers}: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main}
-          element={
-            <Main
-              offers={offers}
-            />
-          }
-        />
-        <Route path={AppRoute.Login}
-          element={<Login />}
-        />
-        <Route path={AppRoute.Favorites}
-          element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <Favorites />
-            </PrivateRoute>
-          }
-        />
-        <Route path={AppRoute.Offer}
-          element={<Offer />}
-        />
-        <Route
-          path="*"
-          element={<NotFound />}
-        />
+        <Route path={AppRoute.Main} element={<Main offers={offers} />}/>
+        <Route path={AppRoute.Login} element={<Login />} />
+        <Route path={AppRoute.Favorites} element={<PrivateRoute authorizationStatus={AuthorizationStatus.Auth}><Favorites offers={offers} /></PrivateRoute>}/>
+        <Route path={AppRoute.Offer} element={<Offer offers={offers}/>}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

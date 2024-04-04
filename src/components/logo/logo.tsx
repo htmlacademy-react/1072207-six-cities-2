@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import cn from 'classnames';
 
 type LogoProps={
   blockName: 'header' | 'footer';
@@ -18,8 +19,7 @@ const sizes = {
 
 function Logo({blockName, active}: LogoProps): JSX.Element {
   const size = sizes[blockName];
-  const additionalClass = active ? (`${blockName}__logo-link ${blockName}__logo-link--active`) : `${blockName}__logo-link`;
-
+  const additionalClass = cn(`${blockName}__logo-link`, { [`${blockName}__logo-link--active`]: active });
   return (
     <Link className={additionalClass} to={'/'}>
       <img
@@ -32,5 +32,4 @@ function Logo({blockName, active}: LogoProps): JSX.Element {
     </Link>
   );
 }
-
 export default Logo;

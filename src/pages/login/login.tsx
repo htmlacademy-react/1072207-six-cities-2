@@ -1,9 +1,9 @@
+import Layout from 'components/layout/layout.tsx';
 import Header from 'components/header/header.tsx';
 
 function Login(): JSX.Element {
   return (
-    <div className="page page--gray page--login">
-      <Header/>
+    <Layout header={<Header/>} className="page--gray page--login">
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -43,8 +43,7 @@ function Login(): JSX.Element {
           </section>
         </div>
       </main>
-    </div>
-
+    </Layout>
   );
 }
 
