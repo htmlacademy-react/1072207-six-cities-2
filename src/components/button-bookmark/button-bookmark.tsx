@@ -2,7 +2,7 @@ type ButtonBookmarkProps={
   isFavorite: boolean;
 }
 
-function ButtonBookmark(offer: ButtonBookmarkProps): JSX.Element {
+function ButtonBookmark({isFavorite}: ButtonBookmarkProps): JSX.Element {
   return (
     <button className="place-card__bookmark-button button"
       type="button"
@@ -15,7 +15,7 @@ function ButtonBookmark(offer: ButtonBookmarkProps): JSX.Element {
         <use xlinkHref="#icon-bookmark"/>
       </svg>
       <span className="visually-hidden">
-        {offer.isFavorite ? 'In bookmarks' : 'To bookmarks'}
+        {isFavorite ? 'In bookmarks' : 'To bookmarks'}
       </span>
     </button>
   );

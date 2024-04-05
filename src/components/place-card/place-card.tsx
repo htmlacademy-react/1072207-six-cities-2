@@ -1,7 +1,7 @@
 import {OfferFromList} from 'types/offer.ts';
 import Rating from 'components/rating/rating.tsx';
-import BadgePremium from 'components/badge-premium/badge-premium.tsx';
-import ButtonBookmark from 'components/buttons/button-bookmark/button-bookmark.tsx';
+import Badge from 'components/badge-premium/badge.tsx';
+import ButtonBookmark from 'components/button-bookmark/button-bookmark.tsx';
 import {Link} from 'react-router-dom';
 import {generatePath} from 'react-router-dom';
 import {AppRoute} from 'const.ts';
@@ -15,7 +15,7 @@ type PlaceCardProps={
 function PlaceCard({offer, onMouseToCard, onMouseLeaveCard}: PlaceCardProps): JSX.Element {
   return (
     <article className="cities__card place-card" onMouseOver={onMouseToCard} onMouseLeave={onMouseLeaveCard}>
-      {offer.isPremium && <BadgePremium blockName='place-card' />}
+      {offer.isPremium && <Badge className="place-card__mark" text="Premium" />}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img

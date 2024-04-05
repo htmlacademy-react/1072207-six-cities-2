@@ -1,6 +1,6 @@
 import Map from 'components/map/map.tsx';
 import {useParams} from 'react-router-dom';
-import BadgePremium from 'components/badge-premium/badge-premium.tsx';
+import Badge from 'components/badge-premium/badge.tsx';
 import {OfferFromList} from 'types/offer.ts';
 import Layout from 'components/layout/layout.tsx';
 import Header from 'components/header/header.tsx';
@@ -69,7 +69,7 @@ function Offer({offers}: OfferProps): JSX.Element | null {
             </div>
             <div className="offer__container container">
               <div className="offer__wrapper">
-                {offer.isPremium && <BadgePremium blockName='offer'/>}
+                {offer.isPremium && <Badge className="offer__mark" text="Premium" />}
                 <div className="offer__name-wrapper">
                   <h1 className="offer__name">
                     Beautiful &amp; luxurious studio at great location

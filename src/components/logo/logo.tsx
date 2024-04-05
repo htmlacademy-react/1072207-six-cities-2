@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 type LogoProps={
   blockName: 'header' | 'footer';
-  active: boolean;
+  active?: boolean;
 }
 
 const sizes = {
@@ -17,7 +17,7 @@ const sizes = {
   },
 };
 
-function Logo({blockName, active}: LogoProps): JSX.Element {
+function Logo({blockName, active = true}: LogoProps): JSX.Element {
   const size = sizes[blockName];
   const additionalClass = cn(`${blockName}__logo-link`, { [`${blockName}__logo-link--active`]: active });
   return (

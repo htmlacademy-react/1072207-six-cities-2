@@ -33,7 +33,7 @@ function Favorites({offers}: FavoritesProps): JSX.Element {
           </div>
         </main>
         <footer className="footer container">
-          <Logo blockName={'footer'} active={false}/>
+          <Logo blockName="footer" active={false}/>
         </footer>
       </>
     </Layout>

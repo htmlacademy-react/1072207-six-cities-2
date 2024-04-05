@@ -1,6 +1,6 @@
 import {OfferFromList} from 'types/offer.ts';
 import Rating from 'components/rating/rating.tsx';
-import BadgePremium from 'components/badge-premium/badge-premium.tsx';
+import Badge from 'components/badge-premium/badge.tsx';
 import {Link} from 'react-router-dom';
 import {generatePath} from 'react-router-dom';
 import {AppRoute} from 'const.ts';
@@ -12,7 +12,7 @@ type FavoritesCardProps={
 function FavoritesCard({offer}: FavoritesCardProps): JSX.Element {
   return (
     <article className="favorites__card place-card">
-      {offer.isPremium && <BadgePremium blockName='place-card' />}
+      {offer.isPremium && <Badge className="place-card__mark" text="Premium" />}
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img
