@@ -8,35 +8,52 @@ import {AppRoute} from 'const.ts';
 
 type PlaceCardProps={
   offer: OfferFromList;
-  onMouseToCard: () => void;
-  onMouseLeaveCard: () => void;
+  onMouseToCard?: () => void;
+  onMouseLeaveCard?: () => void;
+  blockName: 'cities' | 'favorites';
+  active?: boolean;
 }
 
-function PlaceCard({offer, onMouseToCard, onMouseLeaveCard}: PlaceCardProps): JSX.Element {
+const options = {
+  cities: {
+    width: 260,
+    height: 200,
+    info: 'place-card__info',
+  },
+  favorites: {
+    width: 150,
+    height: 110,
+    info: 'favorites__card-info place-card__info',
+  },
+};
+
+
+function PlaceCard({offer, onMouseToCard, onMouseLeaveCard, blockName, active}: PlaceCardProps): JSX.Element {
+  const option = options[blockName];
   return (
-    <article className="cities__card place-card" onMouseOver={onMouseToCard} onMouseLeave={onMouseLeaveCard}>
+    <article className={`${blockName}__card place-card`} onMouseOver={onMouseToCard} onMouseLeave={onMouseLeaveCard}>
       {offer.isPremium && <Badge className="place-card__mark" text="Premium" />}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${blockName}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img
             className="place-card__image"
             src={offer.previewImage}
-            width={260}
-            height={200}
+            width={option.width}
+            height={option.height}
             alt={offer.title}
           />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={option.info}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <ButtonBookmark isFavorite={offer.isFavorite}/>
+          <ButtonBookmark isFavorite={offer.isFavorite} active={active}/>
         </div>
         <Rating rating={offer.rating} calculusSystem={5} />
-        <h2 className="place-card__name">`
+        <h2 className="place-card__name">
           <Link to={generatePath(AppRoute.Offer, {id: offer.id})}>
             {offer.title}
           </Link>

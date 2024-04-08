@@ -1,10 +1,14 @@
+import cn from 'classnames';
+
 type ButtonBookmarkProps={
   isFavorite: boolean;
+  active?: boolean;
 }
 
-function ButtonBookmark({isFavorite}: ButtonBookmarkProps): JSX.Element {
+function ButtonBookmark({isFavorite, active = false}: ButtonBookmarkProps): JSX.Element {
+  const additionalClass = cn(('place-card__bookmark-button button'), {'place-card__bookmark-button--active': active});
   return (
-    <button className="place-card__bookmark-button button"
+    <button className={additionalClass}
       type="button"
     >
       <svg
