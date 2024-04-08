@@ -1,5 +1,5 @@
 import {OfferFromList} from 'types/offer.ts';
-import PlaceCard from '../place-card/place-card.tsx';
+import PlaceCard from 'components/place-card/place-card.tsx';
 import {useState} from 'react';
 
 export type OffersListProps = {
@@ -7,8 +7,6 @@ export type OffersListProps = {
 }
 
 function OffersList({offers}: OffersListProps): JSX.Element {
-
-
   const [, setCard] = useState<string | null>(null);
 
   return (

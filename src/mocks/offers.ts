@@ -26,9 +26,9 @@ export const offers: OfferFromList[] = [
   },
   {
     'id': '290a6e53-27db-42ba-b8e9-fa89b044819c',
-    'title': 'Canal View Prinsengracht',
+    'title': 'Canal View Prinsengracht Абра Кадабра',
     'type': 'house',
-    'price': 268,
+    'price': 368,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/18.jpg',
     'city': {
       'name': 'Amsterdam',
@@ -49,7 +49,7 @@ export const offers: OfferFromList[] = [
   },
   {
     'id': 'fc49a73f-2c52-4e0d-b22d-fc974971a66c',
-    'title': 'The Joshua Tree House',
+    'title': 'The Joshua Tree House Davra',
     'type': 'hotel',
     'price': 317,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/1.jpg',
@@ -95,7 +95,7 @@ export const offers: OfferFromList[] = [
   },
   {
     'id': '290a6e53-27db-42ba-b8eddfdfb044819c',
-    'title': 'Canal View Prinsengracht',
+    'title': 'Canal View Prinsengracht avada Ke',
     'type': 'house',
     'price': 268,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/18.jpg',
