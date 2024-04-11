@@ -2,9 +2,8 @@ import {OfferFromList} from 'types/offer.ts';
 import PlaceCard from 'components/place-card/place-card.tsx';
 import {useState} from 'react';
 
-export type OffersListProps = {
+type OffersListProps = {
   offers: OfferFromList[];
-  length?: number | undefined;
 }
 
 function OffersList({offers}: OffersListProps): JSX.Element {
