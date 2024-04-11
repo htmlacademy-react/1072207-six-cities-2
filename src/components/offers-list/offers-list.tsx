@@ -4,6 +4,7 @@ import {useState} from 'react';
 
 export type OffersListProps = {
   offers: OfferFromList[];
+  length?: number | undefined;
 }
 
 function OffersList({offers}: OffersListProps): JSX.Element {
