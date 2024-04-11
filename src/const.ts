@@ -1,5 +1,3 @@
-// Маршруты для страниц.
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
