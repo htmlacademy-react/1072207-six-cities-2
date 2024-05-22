@@ -8,7 +8,7 @@ type FavoritesListProps={
 
 function FavoritesList({offers} : FavoritesListProps) {
   const uniqueCitiesMap = getGroupedCities(offers);
-
+  // console.log(uniqueCitiesMap);
   return (
     <ul className="favorites__list">
       {

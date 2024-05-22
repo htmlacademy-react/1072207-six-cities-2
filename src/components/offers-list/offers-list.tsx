@@ -1,6 +1,7 @@
 import {OfferFromList} from 'types/offer.ts';
 import PlaceCard from 'components/place-card/place-card.tsx';
 import {useState} from 'react';
+// import {getOffersRelevantCity} from './utils.ts';
 
 type OffersListProps = {
   offers: OfferFromList[];
