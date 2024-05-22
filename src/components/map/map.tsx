@@ -6,13 +6,19 @@ import cn from 'classnames';
 import {OfferFromList} from '../../types/offer.ts';
 import {COORDINATES} from './city-points.ts';
 
-type MapProps = {
-  className: string;
-  offers: OfferFromList[];
-  city: string;
+type CityCoordinates = {
+    latitude: number;
+    longitude: number;
+    zoom: number;
 }
 
-function Map(props: MapProps): JSX.Element {
+type MapProps = {
+  className: string;
+  offers?: OfferFromList[];
+  city?: string;
+}
+
+function Map(props: MapProps){
   const {className, offers, city} = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -26,17 +32,16 @@ function Map(props: MapProps): JSX.Element {
           lat: offer.city.location.latitude,
           lng: offer.city.location.longitude
         });
-
-        // marker.setIcon(
-        // // Если нужен будет новый кастомный маркер смотри гит с примером,
-        //   // добавляется через объект/выбор объекта в зависимости
-        //   // от условия(можно) ссылка на изображение, размеры.
-        // )
-
         marker.addTo(markerLayer);
       });
 
-      map.setView([COORDINATES[city].latitude, COORDINATES[city].longitude], COORDINATES[city].zoom);
+      const cityCoordinates: CityCoordinates = {
+        latitude: COORDINATES[city].latitude,
+        longitude: COORDINATES[city].longitude,
+        zoom: COORDINATES[city].zoom,
+      };
+
+      map.setView([cityCoordinates.latitude, cityCoordinates.longitude], cityCoordinates.zoom);
 
       return () => {
         map.removeLayer(markerLayer);
