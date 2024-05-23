@@ -1,10 +1,10 @@
 import {useRef, useEffect} from 'react';
-import {Marker, layerGroup} from 'leaflet';
+import {Icon, Marker, layerGroup} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map.ts';
 import cn from 'classnames';
 import {OfferFromList} from '../../types/offer.ts';
-import {COORDINATES} from './city-points.ts';
+import {CoordinateKeys, COORDINATES} from '../../const/city-points.ts';
 
 type CityCoordinates = {
     latitude: number;
@@ -14,14 +14,21 @@ type CityCoordinates = {
 
 type MapProps = {
   className: string;
-  offers?: OfferFromList[];
-  city?: string;
+  offers: OfferFromList[];
+  city: CoordinateKeys;
 }
 
 function Map(props: MapProps){
   const {className, offers, city} = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+
+  const defaultCustomIcon = new Icon({
+    iconUrl: 'img/pin.svg',
+    iconSize: [27, 39],
+    iconAnchor: [13.5, 39]
+  });
+
 
   useEffect(() => {
 
@@ -31,10 +38,20 @@ function Map(props: MapProps){
         const marker = new Marker({
           lat: offer.city.location.latitude,
           lng: offer.city.location.longitude
+        }, {
+          icon: defaultCustomIcon,
         });
         marker.addTo(markerLayer);
       });
 
+      return () => {
+        map.removeLayer(markerLayer);
+      };
+    }
+  }, [offers, map]);
+
+  useEffect(() => {
+    if (map) {
       const cityCoordinates: CityCoordinates = {
         latitude: COORDINATES[city].latitude,
         longitude: COORDINATES[city].longitude,
@@ -42,12 +59,9 @@ function Map(props: MapProps){
       };
 
       map.setView([cityCoordinates.latitude, cityCoordinates.longitude], cityCoordinates.zoom);
-
-      return () => {
-        map.removeLayer(markerLayer);
-      };
     }
-  }, [offers, map, city]);
+
+  }, [map, city]);
 
   return (
     <section

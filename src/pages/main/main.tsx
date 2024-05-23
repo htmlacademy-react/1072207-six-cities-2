@@ -5,20 +5,21 @@ import Map from 'components/map/map.tsx';
 import Tabs from 'components/tabs/tabs.tsx';
 import Sorting from 'components/sorting/sorting.tsx';
 import Layout from 'components/layout/layout.tsx';
-import {useEffect, useState} from 'react';
-import {getOffersRelevantCity} from './utils.ts';
+import {useState} from 'react';
+import {CoordinateKeys} from '../../const/city-points.ts';
 
 type MainProps={
   offers: OfferFromList[];
 }
 
 function Main({offers}: MainProps): JSX.Element {
-  const [selectedCity, setSelectedCity] = useState<string | null>('Paris');
-  const handleListItemClick = (cityItemName: string) => {
+  const [selectedCity, setSelectedCity] = useState<CoordinateKeys>('Paris');
+  const handleListItemClick = (cityItemName: CoordinateKeys) => {
     setSelectedCity(cityItemName);
   };
 
-  const relevantOffers: OfferFromList[] = getOffersRelevantCity(offers, selectedCity);
+  // const relevantOffers: OfferFromList[] = getOffersRelevantCity(offers, selectedCity);
+  const relevantOffers: OfferFromList[] = offers.filter((offer) => offer.city.name === selectedCity);
 
   return (
     <Layout header={<Header/>} className="page--gray page--main">
