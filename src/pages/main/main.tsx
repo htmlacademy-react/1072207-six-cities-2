@@ -32,7 +32,7 @@ function Main({offers}: MainProps): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <Sorting/>
-              <OffersList offers={relevantOffers}/>
+              <OffersList offers={relevantOffers} cityList/>
             </section>
             <div className="cities__right-section">
               <Map className="cities__map" offers={relevantOffers} city={selectedCity}/>

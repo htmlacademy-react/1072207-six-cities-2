@@ -5,6 +5,10 @@ import {OfferFromList} from 'types/offer.ts';
 import Layout from 'components/layout/layout.tsx';
 import Header from 'components/header/header.tsx';
 import ReviewsForm from 'components/reviews-form/reviews-form.tsx';
+import {CoordinateKeys} from '../../const/city-points.ts';
+import ReviewsList from '../../components/reviews-list/reviews-list.tsx';
+import {reviews} from '../../mocks/reviews.ts';
+import OffersList from "../../components/offers-list/offers-list.tsx";
 
 type OfferProps={
   offers: OfferFromList[];
@@ -13,10 +17,14 @@ type OfferProps={
 function Offer({offers}: OfferProps): JSX.Element | null {
   const params = useParams();
   const offer:OfferFromList | undefined = offers.find((item) => item.id === params.id);
+  console.log(offer);
+  // console.log(offer.city.name);
 
   if (!offer) {
     return null;
   } else {
+    const city = offer.city.name as CoordinateKeys;
+    const relevantOffers: OfferFromList[] = offers.filter((offerCity) => offerCity.city.name === city);
     return (
       <Layout header={<Header/>}>
         <main className="page__main page__main--offer">
@@ -146,52 +154,30 @@ function Offer({offers}: OfferProps): JSX.Element | null {
                 </div>
                 <section className="offer__reviews reviews">
                   <h2 className="reviews__title">
-                    ReviewsForm · <span className="reviews__amount">1</span>
+                    Количество отзывов · <span className="reviews__amount">{reviews.length}</span>
                   </h2>
-                  <ul className="reviews__list">
-                    <li className="reviews__item">
-                      <div className="reviews__user user">
-                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                          <img
-                            className="reviews__avatar user__avatar"
-                            src="img/avatar-max.jpg"
-                            width={54}
-                            height={54}
-                            alt="ReviewsForm avatar"
-                          />
-                        </div>
-                        <span className="reviews__user-name">Max</span>
-                      </div>
-                      <div className="reviews__info">
-                        <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{width: '80%'}}/>
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div>
-                        <p className="reviews__text">
-                          A quiet cozy and picturesque that hides behind a a river by
-                          the unique lightness of Amsterdam. The building is green and
-                          from 18th century.
-                        </p>
-                        <time className="reviews__time" dateTime="2019-04-24">
-                          April 2019
-                        </time>
-                      </div>
-                    </li>
-                  </ul>
+                  <ReviewsList reviews={reviews}/>
                   <ReviewsForm />
                 </section>
               </div>
             </div>
-            <Map className="offer__map"/>
+            <Map className="offer__map" offers={relevantOffers} city={city}/>
           </section>
+
           <div className="container">
+
+
+
+
+
             <section className="near-places places">
               <h2 className="near-places__title">
                 Other places in the neighbourhood
               </h2>
+
               <div className="near-places__list places__list">
+
+
                 <article className="near-places__card place-card">
                   <div className="near-places__image-wrapper place-card__image-wrapper">
                     <a href="#">
@@ -236,6 +222,8 @@ function Offer({offers}: OfferProps): JSX.Element | null {
                     <p className="place-card__type">Private room</p>
                   </div>
                 </article>
+
+
                 <article className="near-places__card place-card">
                   <div className="near-places__image-wrapper place-card__image-wrapper">
                     <a href="#">
@@ -328,7 +316,11 @@ function Offer({offers}: OfferProps): JSX.Element | null {
                   </div>
                 </article>
               </div>
+              <OffersList offers={relevantOffers} nearList/>
             </section>
+
+
+
           </div>
         </main>
       </Layout>
