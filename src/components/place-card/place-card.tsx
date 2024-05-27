@@ -5,53 +5,39 @@ import ButtonBookmark from 'components/button-bookmark/button-bookmark.tsx';
 import {Link} from 'react-router-dom';
 import {generatePath} from 'react-router-dom';
 import {AppRoute} from 'const.ts';
-import cn from 'classnames';
 
 type PlaceCardProps={
   offer: OfferFromList;
   onMouseToCard?: () => void;
   onMouseLeaveCard?: () => void;
-  // blockName: 'cities' | 'favorites';
   active?: boolean;
-  cityList?: boolean;
-  nearList?: boolean;
-  favoritesList?: boolean;
+  listType: 'cities' | 'near' | 'favorites';
 }
-
-type Options = keyof typeof options;
 
 const options = {
   cities: {
+    classToPlaceCard: 'cities',
     width: 260,
     height: 200,
     info: 'place-card__info',
   },
   favorites: {
+    classToPlaceCard: 'favorites',
     width: 150,
     height: 110,
     info: 'favorites__card-info place-card__info',
   },
   near: {
+    classToPlaceCard: 'near-places',
     width: 260,
     height: 200,
     info: 'place-card__info',
   },
 };
 
-function PlaceCard({offer, onMouseToCard, onMouseLeaveCard, active, cityList = false, nearList = false, favoritesList = false }: PlaceCardProps): JSX.Element {
-
-  const listSwitch:string = cn(
-    {
-      'cities': cityList,
-      'near': nearList,
-      'favorites': favoritesList,
-    }
-  );
-
-  const option: Options = options[listSwitch];
-
-  const additionalClasses: string = listSwitch === 'near' ? 'near-places' : listSwitch;
-
+function PlaceCard({offer, onMouseToCard, onMouseLeaveCard, active, listType}: PlaceCardProps): JSX.Element {
+  const option = options[listType];
+  const additionalClasses: string = option.classToPlaceCard;
 
   return (
     <article className={`${additionalClasses}__card place-card`} onMouseOver={onMouseToCard} onMouseLeave={onMouseLeaveCard}>

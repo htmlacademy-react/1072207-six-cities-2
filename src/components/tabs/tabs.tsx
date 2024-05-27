@@ -1,12 +1,13 @@
 import {CITIES} from './cities.ts';
+import {CoordinateKeys} from '../../const/city-points.ts';
 
 type TabsProps = {
-  onTabsItemClick: (cityItemName: string) => void;
+  onTabsItemClick: (cityItemName: CoordinateKeys) => void;
 }
 
 // eslint-disable-next-line react/prop-types
 function Tabs({onTabsItemClick}: TabsProps): JSX.Element {
-  const handleTabsItemClick = (e: DetailedHTMLProps<LiHTMLAttributes<HTMLLIElement>, HTMLLIElement>): void => {
+  const handleTabsItemClick = (e): void => {
     onTabsItemClick(e.currentTarget.innerText);
   };
 
