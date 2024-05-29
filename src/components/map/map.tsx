@@ -29,9 +29,6 @@ function Map(props: MapProps){
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
-
-
-
   useEffect(() => {
 
     if (map) {
