@@ -1,9 +1,9 @@
 import {Review} from '../../types/review.ts';
 import Rating from '../rating/rating.tsx';
+
 type ReviewsItemProps={
   review: Review;
 }
-
 
 function ReviewsItem({review}: ReviewsItemProps) {
   return (
@@ -26,7 +26,7 @@ function ReviewsItem({review}: ReviewsItemProps) {
           {review.comment}
         </p>
         <time className="reviews__time" dateTime={review.date}>
-          {`${new Date(review.date).toLocaleString('ru-RU', { month: 'long' })}   ${new Date(review.date).getFullYear()}`}
+          {`${new Date(review.date).toLocaleString('ru-RU', { month: 'long' })} ${new Date(review.date).getFullYear()}`}
         </time>
       </div>
     </li>

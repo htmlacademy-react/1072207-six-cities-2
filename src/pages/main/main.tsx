@@ -6,15 +6,15 @@ import Tabs from 'components/tabs/tabs.tsx';
 import Sorting from 'components/sorting/sorting.tsx';
 import Layout from 'components/layout/layout.tsx';
 import {useState} from 'react';
-import {CoordinateKeys} from '../../const/city-points.ts';
+import {CitiesCoordinatesKeys} from '../../const/city-points.ts';
 
 type MainProps={
   offers: OfferFromList[];
 }
 
 function Main({offers}: MainProps): JSX.Element {
-  const [selectedCity, setSelectedCity] = useState<CoordinateKeys>('Paris');
-  const handleListItemClick = (cityItemName: CoordinateKeys) => {
+  const [selectedCity, setSelectedCity] = useState<CitiesCoordinatesKeys>('Paris');
+  const handleListItemClick = (cityItemName: CitiesCoordinatesKeys) => {
     setSelectedCity(cityItemName);
   };
 
@@ -31,7 +31,7 @@ function Main({offers}: MainProps): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offers.length} places to stay in Amsterdam</b>
               <Sorting/>
-              <OffersList offers={relevantOffers} listType='cities'/>
+              <OffersList offers={relevantOffers} listType="cities"/>
             </section>
             <div className="cities__right-section">
               <Map className="cities__map" offers={relevantOffers} city={selectedCity}/>

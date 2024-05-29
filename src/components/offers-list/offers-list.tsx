@@ -19,13 +19,19 @@ const listClasses = {
 
 function OffersList({offers, listType}: OffersListProps): JSX.Element {
   const [, setCard] = useState<string | null>(null);
-  const additionalClassesToList = `'places__list' ${listClasses[listType].classToList}`;
+  const additionalClassesToList = `places__list ${listClasses[listType].classToList}`;
 
   return (
     <div className={additionalClassesToList}>
       {
-        offers.map((item) =>
-          (<PlaceCard key={item.id} offer={item} onMouseToCard={() => setCard(item.id)} onMouseLeaveCard={() => setCard(null)} listType="cities"/>)
+        offers.map((item) => (
+          <PlaceCard
+            key={item.id}
+            offer={item}
+            onMouseToCard={() => setCard(item.id)}
+            onMouseLeaveCard={() => setCard(null)}
+            listType="cities"
+          />)
         )
       }
     </div>

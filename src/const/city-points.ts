@@ -1,4 +1,4 @@
-export const COORDINATES = {
+export const CITIES__COORDINATES = {
   'Paris': {
     'latitude': 48.50,
     'longitude': 2.20,
@@ -31,4 +31,4 @@ export const COORDINATES = {
   }
 };
 
-export type CoordinateKeys = keyof typeof COORDINATES;
+export type CitiesCoordinatesKeys = keyof typeof CITIES__COORDINATES;

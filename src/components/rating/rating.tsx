@@ -5,17 +5,19 @@ type RatingProps={
 }
 const NUMBER_PERCENTAGES = 100;
 
-function Rating(offer: RatingProps): JSX.Element {
-  const ratingRounded = Math.round(offer.rating);
-  const valueOnePointRating = NUMBER_PERCENTAGES / offer.calculusSystem;
+function Rating(props: RatingProps): JSX.Element {
+  const ratingRounded = Math.round(props.rating);
+  const valueOnePointRating = NUMBER_PERCENTAGES / props.calculusSystem;
   const ratingToDisplay = `${valueOnePointRating * ratingRounded}%`;
-  const classNameString = offer.className;
+  const classNameString = props.className;
+
   return (
     <div className={`${classNameString}__rating rating`}>
       <div className={`${classNameString}__stars rating__stars`}>
         <span style={{width: ratingToDisplay}}/>
         <span className="visually-hidden">Rating</span>
       </div>
+      {(classNameString === 'offer') && <span className="offer__rating-value rating__value">{props.rating}</span>}
     </div>
   );
 }
