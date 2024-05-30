@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/use-map.ts';
 import cn from 'classnames';
 import {OfferFromList} from '../../types/offer.ts';
-import {CoordinateKeys, COORDINATES} from '../../const/city-points.ts';
+import {CitiesCoordinatesKeys, CITIES__COORDINATES} from '../../const/city-points.ts';
 
 type CityCoordinates = {
     latitude: number;
@@ -15,20 +15,19 @@ type CityCoordinates = {
 type MapProps = {
   className: string;
   offers: OfferFromList[];
-  city: CoordinateKeys;
+  city: CitiesCoordinatesKeys;
 }
+
+const defaultCustomIcon = new Icon({
+  iconUrl: 'img/pin.svg',
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39]
+});
 
 function Map(props: MapProps){
   const {className, offers, city} = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
-
-  const defaultCustomIcon = new Icon({
-    iconUrl: 'img/pin.svg',
-    iconSize: [27, 39],
-    iconAnchor: [13.5, 39]
-  });
-
 
   useEffect(() => {
 
@@ -53,9 +52,9 @@ function Map(props: MapProps){
   useEffect(() => {
     if (map) {
       const cityCoordinates: CityCoordinates = {
-        latitude: COORDINATES[city].latitude,
-        longitude: COORDINATES[city].longitude,
-        zoom: COORDINATES[city].zoom,
+        latitude: CITIES__COORDINATES[city].latitude,
+        longitude: CITIES__COORDINATES[city].longitude,
+        zoom: CITIES__COORDINATES[city].zoom,
       };
 
       map.setView([cityCoordinates.latitude, cityCoordinates.longitude], cityCoordinates.zoom);

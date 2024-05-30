@@ -1,20 +1,37 @@
 import {OfferFromList} from 'types/offer.ts';
 import PlaceCard from 'components/place-card/place-card.tsx';
 import {useState} from 'react';
-// import {getOffersRelevantCity} from './utils.ts';
 
 type OffersListProps = {
   offers: OfferFromList[];
+  listType: 'cities' | 'near';
 }
 
-function OffersList({offers}: OffersListProps): JSX.Element {
+const listClasses = {
+  cities: {
+    classToList: 'cities__places-list',
+  },
+  near: {
+    classToList: 'near-places__list',
+  }
+};
+
+
+function OffersList({offers, listType}: OffersListProps): JSX.Element {
   const [, setCard] = useState<string | null>(null);
+  const additionalClassesToList = `places__list ${listClasses[listType].classToList}`;
 
   return (
-    <div className="cities__places-list places__list">
+    <div className={additionalClassesToList}>
       {
-        offers.map((item) =>
-          (<PlaceCard key={item.id} offer={item} onMouseToCard={() => setCard(item.id)} onMouseLeaveCard={() => setCard(null)} blockName="cities"/>)
+        offers.map((item) => (
+          <PlaceCard
+            key={item.id}
+            offer={item}
+            onMouseToCard={() => setCard(item.id)}
+            onMouseLeaveCard={() => setCard(null)}
+            listType="cities"
+          />)
         )
       }
     </div>

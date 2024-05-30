@@ -19,7 +19,10 @@ const sizes = {
 
 function Logo({blockName, active = true}: LogoProps): JSX.Element {
   const size = sizes[blockName];
-  const additionalClass = cn(`${blockName}__logo-link`, { [`${blockName}__logo-link--active`]: active });
+  const additionalClass = cn(
+    `${blockName}__logo-link`,
+    { [`${blockName}__logo-link--active`]: active }
+  );
   return (
     <Link className={additionalClass} to={'/'}>
       <img
