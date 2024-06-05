@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const.ts';
+import {AppRoute, AuthorizationStatus} from '../../const/const.ts';
 
 import Main from 'pages/main/main.tsx';
 import Login from 'pages/login/login.tsx';
@@ -10,11 +10,29 @@ import PrivateRoute from 'components/private-route/private-route.tsx';
 
 import {OfferFromList} from 'types/offer.ts';
 
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {useSelector} from 'react-redux';
+import {store} from '../../store';
+
 type AppProps={
   offers: OfferFromList[];
 }
 
+// Не работает
+// const citySelected = useAppSelector((state) => state.selectedCity);
+// const citySelected = useSelector((state) => state.selectedCity);
+
+// Работает.
+const citySelected = store.getState().selectedCity;
+
+
+console.log(citySelected);
+
 function App({offers}: AppProps): JSX.Element {
+
+  // const citySelected = useAppSelector((state) => state.selectedCity);
+  console.log(citySelected);
+
   return (
     <BrowserRouter>
       <Routes>
