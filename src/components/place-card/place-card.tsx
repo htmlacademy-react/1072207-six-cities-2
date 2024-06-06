@@ -4,7 +4,7 @@ import Badge from 'components/badge-premium/badge.tsx';
 import ButtonBookmark from 'components/button-bookmark/button-bookmark.tsx';
 import {Link} from 'react-router-dom';
 import {generatePath} from 'react-router-dom';
-import {AppRoute} from 'const.ts';
+import {AppRoute} from 'const/const.ts';
 
 type PlaceCardProps={
   offer: OfferFromList;
