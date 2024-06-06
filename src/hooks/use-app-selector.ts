@@ -4,8 +4,7 @@
 // const offers = useAppSelector((state) => state.offers); Вернет оферы
 //
 
-
 import {useSelector, TypedUseSelectorHook} from 'react-redux';
 import {State} from '../types/state.ts';
 
-export const useAppSelector: TypedUseSelectorHook<State> = () => useSelector;
+export const useAppSelector: TypedUseSelectorHook<State> = useSelector;

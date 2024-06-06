@@ -8,38 +8,29 @@ import NotFound from 'pages/not-found/not-found.tsx';
 import Favorites from 'pages/favorites/favorites.tsx';
 import PrivateRoute from 'components/private-route/private-route.tsx';
 
-import {OfferFromList} from 'types/offer.ts';
-
-import {useAppSelector} from '../../hooks/use-app-selector.ts';
-import {useSelector} from 'react-redux';
+import {useAppSelector} from 'hooks/use-app-selector.ts';
+import {OfferFromList} from '../../types/offer.ts';
+import {offers} from '../../mocks/offers.ts';
 import {store} from '../../store';
+import {fetchOffers} from '../../store/action.ts';
 
-type AppProps={
-  offers: OfferFromList[];
-}
+const loadOffers: OfferFromList[] = offers;
+store.dispatch(fetchOffers(loadOffers))
 
-// Не работает
-// const citySelected = useAppSelector((state) => state.selectedCity);
-// const citySelected = useSelector((state) => state.selectedCity);
-
-// Работает.
-const citySelected = store.getState().selectedCity;
-
-
-console.log(citySelected);
-
-function App({offers}: AppProps): JSX.Element {
-
+function App(): JSX.Element {
   // const citySelected = useAppSelector((state) => state.selectedCity);
-  console.log(citySelected);
+  const offersStore = useAppSelector((state) => state.offers);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<Main offers={offers} />}/>
+        <Route path={AppRoute.Main} element={<Main />}/>
         <Route path={AppRoute.Login} element={<Login />} />
-        <Route path={AppRoute.Favorites} element={<PrivateRoute authorizationStatus={AuthorizationStatus.Auth}><Favorites offers={offers} /></PrivateRoute>}/>
-        <Route path={AppRoute.Offer} element={<Offer offers={offers}/>}/>
+        <Route path={AppRoute.Favorites} element={
+          <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <Favorites offers={offersStore} />
+          </PrivateRoute>}/>
+        <Route path={AppRoute.Offer} element={<Offer offers={offersStore}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

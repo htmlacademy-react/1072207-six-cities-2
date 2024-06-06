@@ -1,23 +1,11 @@
-//
-// Создайте новый файл для описания редьюсера (например, reducer.ts).
-//   Опишите в нём:
-//
-//   Объект начального состояния: город
-//   (используется для отбора списка предложений в определённом городе)
-//   и список предложений по аренде.
-//
-//   Функцию-редьюсер. Она принимает в качестве параметров текущий state и действие (action).
-//   Результатом выполнения редьюсера станет новое состояние.
-//   Обратите внимание, для именования функций-редьюсеров применяются существительные.
-
 import {createReducer} from '@reduxjs/toolkit';
-import {offers} from '../mocks/offers.ts';
 import {OfferFromList} from '../types/offer.ts';
 import {updateActiveCity, fetchOffers} from './action.ts';
+import {CitiesCoordinatesKeys} from '../const/city-points.ts';
 
 type InitialState = {
-  selectedCity: string;
-  offers: OfferFromList[] | null;
+  selectedCity: CitiesCoordinatesKeys;
+  offers: OfferFromList[] | [];
 }
 
 const initialState:InitialState = {
@@ -27,12 +15,11 @@ const initialState:InitialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(fetchOffers, (state) => {
-      state.offers = offers;
-      // console.log(state);
+    .addCase(fetchOffers, (state, action) => {
+      state.offers = action.payload;
     })
-    .addCase(updateActiveCity, (state) => {
-      state.selectedCity = state.offers[0].city.name;
+    .addCase(updateActiveCity, (state, action) => {
+      state.selectedCity = action.payload;
     });
 });
 

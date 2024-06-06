@@ -1,10 +1,14 @@
 import {createAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../const/const.ts';
 
-export const fetchOffers = createAction(`${NameSpace.App}/action/fetchOffers`);
-export const updateActiveCity = createAction(`${NameSpace.Offers}/action/updateActiveCity`);
+export const updateActiveCity = createAction(`${NameSpace.App}/action/updateActiveCity`, (cityName) => {
+  return {
+    payload: cityName,
+  }
+});
 
-
-
-// const store = useAppSelector((state) => state);
-// console.log(store);
+export const fetchOffers = createAction(`${NameSpace.Offers}/action/fetchOffers`, (offers) => {
+  return {
+    payload: offers,
+  }
+});
