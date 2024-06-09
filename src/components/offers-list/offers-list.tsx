@@ -1,6 +1,8 @@
 import {OfferFromList} from 'types/offer.ts';
 import PlaceCard from 'components/place-card/place-card.tsx';
 import {useState} from 'react';
+import {store} from '../../store';
+import {updateActiveOffer} from '../../store/action.ts';
 
 type OffersListProps = {
   offers: OfferFromList[];
@@ -28,8 +30,14 @@ function OffersList({offers, listType}: OffersListProps): JSX.Element {
           <PlaceCard
             key={item.id}
             offer={item}
-            onMouseToCard={() => setCard(item.id)}
-            onMouseLeaveCard={() => setCard(null)}
+            onMouseToCard={() => {
+              setCard(item.id);
+              store.dispatch(updateActiveOffer(item.id));
+            }}
+            onMouseLeaveCard={() => {
+              setCard(null);
+              store.dispatch(updateActiveOffer(''));
+            }}
             listType="cities"
           />)
         )

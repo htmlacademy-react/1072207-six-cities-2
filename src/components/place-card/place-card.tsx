@@ -39,7 +39,11 @@ function PlaceCard({offer, onMouseToCard, onMouseLeaveCard, listType}: PlaceCard
   const additionalClasses: string = option.classToPlaceCard;
 
   return (
-    <article className={`${additionalClasses}__card place-card`} onMouseOver={onMouseToCard} onMouseLeave={onMouseLeaveCard}>
+    <article className={`${additionalClasses}__card place-card`}
+      onMouseOver={onMouseToCard}
+      onMouseLeave={onMouseLeaveCard}
+
+    >
       {offer.isPremium && <Badge className="place-card__mark" text="Premium" />}
       <div className={`${additionalClasses}__image-wrapper place-card__image-wrapper`}>
         <a href="#">

@@ -15,7 +15,7 @@ import {store} from '../../store';
 import {fetchOffers} from '../../store/action.ts';
 
 const loadOffers: OfferFromList[] = offers;
-store.dispatch(fetchOffers(loadOffers))
+store.dispatch(fetchOffers(loadOffers));
 
 function App(): JSX.Element {
   // const citySelected = useAppSelector((state) => state.selectedCity);
@@ -29,7 +29,9 @@ function App(): JSX.Element {
         <Route path={AppRoute.Favorites} element={
           <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
             <Favorites offers={offersStore} />
-          </PrivateRoute>}/>
+          </PrivateRoute>
+        }
+        />
         <Route path={AppRoute.Offer} element={<Offer offers={offersStore}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
