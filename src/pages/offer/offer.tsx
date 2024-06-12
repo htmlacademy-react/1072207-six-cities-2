@@ -12,7 +12,7 @@ import Badge from 'components/badge-premium/badge.tsx';
 import OfferGallery from '../../components/offer-gallery/offer-gallery.tsx';
 import ButtonBookmark from '../../components/button-bookmark/button-bookmark.tsx';
 import Rating from '../../components/rating/rating.tsx';
-import {capitalizeFirstLetter} from '../../utils.ts';
+import {capitalizeFirstLetter} from '../../utils/font/capitalize-first-letter.ts';
 import OfferInside from '../../components/offer-inside/offer-inside.tsx';
 import OfferHost from '../../components/offer-host/offer-host.tsx';
 

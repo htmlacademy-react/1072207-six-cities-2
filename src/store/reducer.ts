@@ -2,19 +2,20 @@ import {createReducer} from '@reduxjs/toolkit';
 import {OfferFromList} from '../types/offer.ts';
 import {updateActiveCity, fetchOffers, updateActiveOffer, updateSortingPosition} from './action.ts';
 import {CitiesCoordinatesKeys} from '../const/city-points.ts';
+import sortingKey from '../const/sorting-const.ts';
 
-type InitialState = {
+export type InitialState = {
   selectedCity: CitiesCoordinatesKeys;
   offers: OfferFromList[] | [];
   idActiveOffer: string;
-  sortingPosition: string;
+  sortingPosition: string |'Popular' | 'Price: high to low' | 'Price: low to high' | 'Top rated first';
 }
 
-const initialState:InitialState = {
+export const initialState:InitialState = {
   selectedCity: 'Paris',
   offers: [],
   idActiveOffer: '',
-  sortingPosition: 'Popular',
+  sortingPosition: sortingKey.base,
 };
 
 const reducer = createReducer(initialState, (builder) => {

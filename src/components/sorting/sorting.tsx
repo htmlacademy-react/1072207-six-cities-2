@@ -1,109 +1,82 @@
 import {useState, useRef} from 'react';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
-import {store} from '../../store';
-import {fetchOffers, updateSortingPosition} from '../../store/action.ts';
+import useOnClickOutside from '../../hooks/use-on-click-outside.ts';
+import sortingKey from '../../const/sorting-const.ts';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
+import {updateSortingPosition} from '../../store/action.ts';
+import cn from 'classnames';
 
 function Sorting() {
-  const offersStore = useAppSelector((state) => state.offers);
   const sortingPositionStore = useAppSelector((state) => state.sortingPosition);
-  const refOffers = useRef(offersStore);
-  const offersSave = refOffers.current;
-  const offersSort = [...offersStore];
-
-  function sortingPriceMinMax() {
-    offersSort.sort((a, b) => {
-      if (a.price < b.price) {
-        return -1;
-      }
-      if (a.price > b.price) {
-        return 1;
-      }
-      return 0;
-    });
-    store.dispatch(fetchOffers(offersSort));
-    store.dispatch(updateSortingPosition('Price: low to high'));
-  }
-
-  function sortingPriceMaxMin() {
-    offersSort.sort((a, b) => {
-      if (a.price > b.price) {
-        return -1;
-      }
-      if (a.price < b.price) {
-        return 1;
-      }
-      return 0;
-    });
-    store.dispatch(fetchOffers(offersSort));
-    store.dispatch(updateSortingPosition('Price: high to low'));
-  }
-
-  function sortingMaxRating() {
-    offersSort.sort((a, b) => {
-      if (a.rating > b.rating) {
-        return -1;
-      }
-      if (a.rating < b.rating) {
-        return 1;
-      }
-      return 0;
-    });
-    store.dispatch(fetchOffers(offersSort));
-    store.dispatch(updateSortingPosition('Top rated first'));
-  }
-
-  function sortingBase() {
-    store.dispatch(fetchOffers(offersSave));
-    store.dispatch(updateSortingPosition('Popular'));
-  }
 
   const [switcher, setSwitcher] = useState(false);
-
   function onSortFormClick () {
     setSwitcher(!switcher);
   }
 
-  let classOpenForm = 'places__options places__options--custom';
+  const formRef = useRef(null);
+  useOnClickOutside(formRef, () => setSwitcher(false));
 
-  if (switcher) {
-    classOpenForm = 'places__options places__options--custom places__options--opened';
-  }
+  const classOpenForm = cn(
+    'places__options places__options--custom',
+    {['places__options--opened']: switcher}
+  );
+
+  const dispatch = useAppDispatch();
+  const updaterSortingPosition = (keyPosition: string) => {
+    dispatch(updateSortingPosition(keyPosition));
+  };
 
   return (
-    <form className="places__sorting"
+    <form ref={formRef} className="places__sorting"
       action="#"
       method="get"
       onClick={() => onSortFormClick()}
     >
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex={0}>{sortingPositionStore}
         <svg className="places__sorting-arrow" width={7} height={4}>
           <use xlinkHref="#icon-arrow-select"/>
         </svg>
       </span>
       <ul className={classOpenForm}>
-        <li
-          className="places__option places__option--active"
-          tabIndex={0}
-          onClick={() => sortingBase()}
-        >
-          Popular
-        </li>
-        <li className="places__option" tabIndex={0}
-          onClick={() => sortingPriceMinMax()}
-        >
-          Price: low to high
-        </li>
-        <li className="places__option" tabIndex={0}
-          onClick={() => sortingPriceMaxMin()}
-        >
-          Price: high to low
-        </li>
-        <li className="places__option" tabIndex={0}
-          onClick={() => sortingMaxRating()}
-        >
-          Top rated first
-        </li>
+        {
+          Object.values(sortingKey).map((value) => (
+            <li
+              key={value}
+              className={cn('places__option',
+                {['places__option--active']: value === sortingPositionStore}
+              )}
+              tabIndex={0}
+              onClick={() => updaterSortingPosition(value)}
+            >
+              {value}
+            </li>
+          ))
+        }
+
+        {/*<li*/}
+        {/*  className="places__option places__option--active"*/}
+        {/*  tabIndex={0}*/}
+        {/*  onClick={() => updaterSortingPosition(sortingKey.base)}*/}
+        {/*>*/}
+        {/*  Popular*/}
+        {/*</li>*/}
+        {/*<li className="places__option" tabIndex={0}*/}
+        {/*  onClick={() => updaterSortingPosition(sortingKey.increase)}*/}
+        {/*>*/}
+        {/*  Price: low to high*/}
+        {/*</li>*/}
+        {/*<li className="places__option" tabIndex={0}*/}
+        {/*  onClick={() => updaterSortingPosition(sortingKey.decrease)}*/}
+        {/*>*/}
+        {/*  Price: high to low*/}
+        {/*</li>*/}
+        {/*<li className="places__option" tabIndex={0}*/}
+        {/*  onClick={() => updaterSortingPosition(sortingKey.rating)}*/}
+        {/*>*/}
+        {/*  Top rated first*/}
+        {/*</li>*/}
       </ul>
     </form>
   );
