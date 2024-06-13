@@ -5,6 +5,7 @@ import ButtonBookmark from 'components/button-bookmark/button-bookmark.tsx';
 import {Link} from 'react-router-dom';
 import {generatePath} from 'react-router-dom';
 import {AppRoute} from 'const/const.ts';
+import {capitalizeFirstLetter} from '../../utils/font/capitalize-first-letter.ts';
 
 type PlaceCardProps={
   offer: OfferFromList;
@@ -39,7 +40,11 @@ function PlaceCard({offer, onMouseToCard, onMouseLeaveCard, listType}: PlaceCard
   const additionalClasses: string = option.classToPlaceCard;
 
   return (
-    <article className={`${additionalClasses}__card place-card`} onMouseOver={onMouseToCard} onMouseLeave={onMouseLeaveCard}>
+    <article className={`${additionalClasses}__card place-card`}
+      onMouseOver={onMouseToCard}
+      onMouseLeave={onMouseLeaveCard}
+
+    >
       {offer.isPremium && <Badge className="place-card__mark" text="Premium" />}
       <div className={`${additionalClasses}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
@@ -66,7 +71,7 @@ function PlaceCard({offer, onMouseToCard, onMouseLeaveCard, listType}: PlaceCard
             {offer.title}
           </Link>
         </h2>
-        <p className="place-card__type">{offer.type}</p>
+        <p className="place-card__type">{capitalizeFirstLetter(offer.type)}</p>
       </div>
     </article>
   );

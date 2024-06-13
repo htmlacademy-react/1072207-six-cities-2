@@ -5,6 +5,7 @@ import useMap from '../../hooks/use-map.ts';
 import cn from 'classnames';
 import {OfferFromList} from '../../types/offer.ts';
 import {CitiesCoordinatesKeys, CITIES__COORDINATES} from '../../const/city-points.ts';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
 
 type CityCoordinates = {
     latitude: number;
@@ -24,21 +25,33 @@ const defaultCustomIcon = new Icon({
   iconAnchor: [13.5, 39]
 });
 
+const activeCustomIcon = new Icon({
+  iconUrl: 'img/pin-active.svg',
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39]
+});
+
 function Map(props: MapProps){
   const {className, offers, city} = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
+  const selectedCardIdOfferStore = useAppSelector((state) => state.idActiveOffer);
 
   useEffect(() => {
 
     if (map) {
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
+        let iconToMarker = defaultCustomIcon;
+        if (offer.id === selectedCardIdOfferStore) {
+          iconToMarker = activeCustomIcon;
+        }
+
         const marker = new Marker({
           lat: offer.city.location.latitude,
           lng: offer.city.location.longitude
         }, {
-          icon: defaultCustomIcon,
+          icon: iconToMarker,
         });
         marker.addTo(markerLayer);
       });
@@ -47,7 +60,7 @@ function Map(props: MapProps){
         map.removeLayer(markerLayer);
       };
     }
-  }, [offers, map]);
+  }, [offers, map, selectedCardIdOfferStore]);
 
   useEffect(() => {
     if (map) {

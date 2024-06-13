@@ -120,7 +120,7 @@ export const offers: OfferFromList[] = [
     'id': 'fc49a73f-2dfffd-b22d-fc974971a66c',
     'title': 'The Joshua Tree House',
     'type': 'hotel',
-    'price': 317,
+    'price': 333,
     'previewImage': 'https://13.design.htmlacademy.pro/static/hotel/1.jpg',
     'city': {
       'name': 'Paris',
