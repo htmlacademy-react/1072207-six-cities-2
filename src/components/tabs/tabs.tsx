@@ -1,15 +1,11 @@
 import {CITIES__COORDINATES, CitiesCoordinatesKeys} from '../../const/city-points.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import cn from 'classnames';
+import {updateActiveCity} from '../../store/action.ts';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 
-type TabsProps = {
-  onTabsItemClick: (cityItemName: CitiesCoordinatesKeys) => void;
-}
-
-function Tabs({onTabsItemClick}: TabsProps): JSX.Element {
-  const handleTabsItemClick = (city: CitiesCoordinatesKeys): void => {
-    onTabsItemClick(city);
-  };
+function Tabs(): JSX.Element {
+  const dispatch = useAppDispatch();
   const selectedCityStore: CitiesCoordinatesKeys = useAppSelector((state) => state.selectedCity);
   const cities = Object.keys(CITIES__COORDINATES) as CitiesCoordinatesKeys[];
 
@@ -27,7 +23,7 @@ function Tabs({onTabsItemClick}: TabsProps): JSX.Element {
 
               return (
                 <li className="locations__item"
-                  onClick={() => handleTabsItemClick(city)}
+                  onClick={() => dispatch(updateActiveCity(city))}
                   key={keyValue}
                 >
                   <a className={additionalClass}

@@ -2,6 +2,7 @@ import {createAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../const/const.ts';
 import {OfferFromList} from '../types/offer.ts';
 import {CitiesCoordinatesKeys} from '../const/city-points.ts';
+import {SortValue} from '../const/sorting-const.ts';
 
 export const updateActiveCity = createAction(`${NameSpace.App}/action/updateActiveCity`, (cityName: CitiesCoordinatesKeys) => ({
   payload: cityName,
@@ -15,6 +16,6 @@ export const updateActiveOffer = createAction(`${NameSpace.Offer}/action/updateA
   payload: idOffer,
 }));
 
-export const updateSortingPosition = createAction(`${NameSpace.Offers}/action/updateSortingPosition`, (sortingPosition: string) => ({
+export const updateSortingPosition = createAction(`${NameSpace.Offers}/action/updateSortingPosition`, (sortingPosition: SortValue) => ({
   payload: sortingPosition,
 }));

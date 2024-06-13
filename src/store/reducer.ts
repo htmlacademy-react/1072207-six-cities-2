@@ -2,20 +2,20 @@ import {createReducer} from '@reduxjs/toolkit';
 import {OfferFromList} from '../types/offer.ts';
 import {updateActiveCity, fetchOffers, updateActiveOffer, updateSortingPosition} from './action.ts';
 import {CitiesCoordinatesKeys} from '../const/city-points.ts';
-import sortingKey from '../const/sorting-const.ts';
+import sorting, {SortValue} from '../const/sorting-const.ts';
 
 export type InitialState = {
   selectedCity: CitiesCoordinatesKeys;
-  offers: OfferFromList[] | [];
+  offers: OfferFromList[];
   idActiveOffer: string;
-  sortingPosition: string |'Popular' | 'Price: high to low' | 'Price: low to high' | 'Top rated first';
+  sortingType: SortValue;
 }
 
 export const initialState:InitialState = {
   selectedCity: 'Paris',
   offers: [],
   idActiveOffer: '',
-  sortingPosition: sortingKey.base,
+  sortingType: sorting.base,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -30,7 +30,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.idActiveOffer = action.payload;
     })
     .addCase(updateSortingPosition, (state, action) => {
-      state.sortingPosition = action.payload;
+      state.sortingType = action.payload;
     });
 
 });

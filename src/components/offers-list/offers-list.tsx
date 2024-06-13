@@ -1,8 +1,8 @@
 import {OfferFromList} from 'types/offer.ts';
 import PlaceCard from 'components/place-card/place-card.tsx';
 import {useState} from 'react';
-import {store} from '../../store';
 import {updateActiveOffer} from '../../store/action.ts';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 
 type OffersListProps = {
   offers: OfferFromList[];
@@ -18,10 +18,10 @@ const listClasses = {
   }
 };
 
-
 function OffersList({offers, listType}: OffersListProps): JSX.Element {
   const [, setCard] = useState<string | null>(null);
   const additionalClassesToList = `places__list ${listClasses[listType].classToList}`;
+  const dispatch = useAppDispatch();
 
   return (
     <div className={additionalClassesToList}>
@@ -32,11 +32,11 @@ function OffersList({offers, listType}: OffersListProps): JSX.Element {
             offer={item}
             onMouseToCard={() => {
               setCard(item.id);
-              store.dispatch(updateActiveOffer(item.id));
+              dispatch(updateActiveOffer(item.id));
             }}
             onMouseLeaveCard={() => {
               setCard(null);
-              store.dispatch(updateActiveOffer(''));
+              dispatch(updateActiveOffer(''));
             }}
             listType="cities"
           />)

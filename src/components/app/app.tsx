@@ -18,7 +18,6 @@ const loadOffers: OfferFromList[] = offers;
 store.dispatch(fetchOffers(loadOffers));
 
 function App(): JSX.Element {
-  // const citySelected = useAppSelector((state) => state.selectedCity);
   const offersStore = useAppSelector((state) => state.offers);
 
   return (

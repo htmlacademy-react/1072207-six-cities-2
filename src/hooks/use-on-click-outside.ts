@@ -1,23 +1,43 @@
-import {useEffect} from 'react';
+import type { RefObject } from 'react';
+import { useEventListener } from 'usehooks-ts';
 
-const useOnClickOutside = (formRef: React.MutableRefObject<null>, handler) => {
-  useEffect(() => {
-    const listener = (event) => {
-      if (!formRef.current || formRef.current.contains(event.target)) {
+type EventType =
+  | 'mousedown'
+  | 'mouseup'
+  | 'touchstart'
+  | 'touchend'
+  | 'focusin'
+  | 'focusout'
+
+export function useOnClickOutside<T extends HTMLElement = HTMLElement>(
+  ref: RefObject<T> | RefObject<T>[],
+  handler: (event: MouseEvent | TouchEvent | FocusEvent) => void,
+  eventType: EventType = 'mousedown',
+  eventListenerOptions: AddEventListenerOptions = {},
+): void {
+  useEventListener(
+    eventType,
+    (event) => {
+      const target = event.target as Node;
+
+      // Do nothing if the target is not connected element with document
+      if (!target || !target.isConnected) {
         return;
       }
-      handler(event);
-    };
 
-    document.addEventListener('mousedown', listener);
-    document.addEventListener('touchstart', listener);
+      const isOutside = Array.isArray(ref)
+        ? ref
+          .filter(r => Boolean(r.current))
+          .every(r => r.current && !r.current.contains(target))
+        : ref.current && !ref.current.contains(target);
 
-
-    return () => {
-      document.removeEventListener('mousedown', listener);
-      document.removeEventListener('touchstart', listener);
-    };
-  }, [formRef, handler]);
-};
+      if (isOutside) {
+        handler(event);
+      }
+    },
+    undefined,
+    eventListenerOptions,
+  );
+}
 
 export default useOnClickOutside;
