@@ -1,6 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {OfferFromList} from '../types/offer.ts';
-import {updateActiveCity, fetchOffers, updateActiveOffer, updateSortingPosition} from './action.ts';
+import {updateActiveCity, fetchOffers, updateActiveOffer, updateSortingPosition, loadOffers} from './action.ts';
 import {CitiesCoordinatesKeys} from '../const/city-points.ts';
 import sorting, {SortValue} from '../const/sorting-const.ts';
 
@@ -31,6 +31,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(updateSortingPosition, (state, action) => {
       state.sortingType = action.payload;
+    })
+    .addCase(loadOffers, (state, action) => {
+      state.offers = action.payload;
     });
 
 });

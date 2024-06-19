@@ -9,13 +9,10 @@ import Favorites from 'pages/favorites/favorites.tsx';
 import PrivateRoute from 'components/private-route/private-route.tsx';
 
 import {useAppSelector} from 'hooks/use-app-selector.ts';
-import {OfferFromList} from '../../types/offer.ts';
-import {offers} from '../../mocks/offers.ts';
 import {store} from '../../store';
-import {fetchOffers} from '../../store/action.ts';
+import {fetchOffersAction} from '../../store/api-actions.ts';
+store.dispatch(fetchOffersAction());
 
-const loadOffers: OfferFromList[] = offers;
-store.dispatch(fetchOffers(loadOffers));
 
 function App(): JSX.Element {
   const offersStore = useAppSelector((state) => state.offers);

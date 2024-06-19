@@ -19,3 +19,8 @@ export const updateActiveOffer = createAction(`${NameSpace.Offer}/action/updateA
 export const updateSortingPosition = createAction(`${NameSpace.Offers}/action/updateSortingPosition`, (sortingPosition: SortValue) => ({
   payload: sortingPosition,
 }));
+
+// export const loadOffers = createAction<OfferFromList[]>(`${NameSpace.Offers}/action/updateSortingPosition`);
+export const loadOffers = createAction(`${NameSpace.Offers}/action/load`, (offers: OfferFromList[]) => ({
+  payload: offers,
+}));
