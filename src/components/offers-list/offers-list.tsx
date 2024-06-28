@@ -1,7 +1,7 @@
 import {OfferFromList} from 'types/offer.ts';
 import PlaceCard from 'components/place-card/place-card.tsx';
 import {useState} from 'react';
-import {updateActiveOffer} from '../../store/action.ts';
+import {updateActiveOffer} from '../../store/offers-data/offers-data.slice.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 
 type OffersListProps = {

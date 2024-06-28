@@ -6,6 +6,7 @@ import cn from 'classnames';
 import {OfferFromList} from '../../types/offer.ts';
 import {CitiesCoordinatesKeys, CITIES__COORDINATES} from '../../const/city-points.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {getIdActiveOffer} from '../../store/offers-data/offers-data.selectors.ts';
 
 type CityCoordinates = {
     latitude: number;
@@ -35,7 +36,7 @@ function Map(props: MapProps){
   const {className, offers, city} = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
-  const selectedCardIdOfferStore = useAppSelector((state) => state.idActiveOffer);
+  const selectedCardIdOfferStore = useAppSelector(getIdActiveOffer);
 
   useEffect(() => {
 
@@ -78,7 +79,7 @@ function Map(props: MapProps){
   return (
     <section
       className={cn('map', className)}
-      style={{height: '500px', backgroundColor: 'white'}}
+      style={{height: '100%'}}
       ref={mapRef}
     />
   );
