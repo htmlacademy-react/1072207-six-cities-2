@@ -3,11 +3,14 @@ import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import useOnClickOutside from '../../hooks/use-on-click-outside.ts';
 import sorting, {SortValue} from '../../const/sorting-const.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
-import {updateSortingPosition} from '../../store/action.ts';
+import {updateSortingPosition} from '../../store/offers-data/offers-data.slice.ts';
+
+
 import cn from 'classnames';
+import {getSortingType} from '../../store/offers-data/offers-data.selectors.ts';
 
 function Sorting() {
-  const sortingPosition = useAppSelector((state) => state.sortingType);
+  const sortingPosition = useAppSelector(getSortingType);
 
   const [switcher, setSwitcher] = useState(false);
   function onSortFormClick () {
@@ -23,7 +26,7 @@ function Sorting() {
   );
 
   const dispatch = useAppDispatch();
-  const updaterSortingPosition = (keyType: SortValue) => {
+  const handlerSortingPosition = (keyType: SortValue) => {
     dispatch(updateSortingPosition(keyType));
   };
 
@@ -48,7 +51,7 @@ function Sorting() {
                 {['places__option--active']: value === sortingPosition}
               )}
               tabIndex={0}
-              onClick={() => updaterSortingPosition(value)}
+              onClick={() => handlerSortingPosition(value)}
             >
               {value}
             </li>

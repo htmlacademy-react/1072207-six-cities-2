@@ -4,6 +4,7 @@ import Map from '../map/map.tsx';
 import {OfferFromList} from '../../types/offer.ts';
 import {CitiesCoordinatesKeys} from '../../const/city-points.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {getSelectedCity} from '../../store/offers-data/offers-data.selectors.ts';
 
 type ContainerOffers = {
   relevantOffers: OfferFromList[];
@@ -11,7 +12,7 @@ type ContainerOffers = {
 
 
 function ContainerOffers({relevantOffers}: ContainerOffers) {
-  const selectedCityStore: CitiesCoordinatesKeys = useAppSelector((state) => state.selectedCity);
+  const selectedCityStore: CitiesCoordinatesKeys = useAppSelector(getSelectedCity);
 
   return (
     <div className="cities__places-container container">

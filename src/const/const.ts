@@ -11,13 +11,20 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+// todo проверить все ли имена используются?
 export enum NameSpace {
+  Offers = 'OFFERS',
+  User = 'USER',
   App = 'APP',
   Main = 'MAIN',
-  Offers = 'OFFERS',
   Offer = 'OFFER',
   NearPlaces = 'NEAR_PLACES',
   Favorites = 'FAVORITES',
   Reviews = 'REVIEWS',
-  User = 'USER'
+}
+
+export enum APIRoute {
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
 }

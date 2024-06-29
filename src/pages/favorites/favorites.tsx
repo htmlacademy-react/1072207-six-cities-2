@@ -3,12 +3,20 @@ import Header from 'components/header/header.tsx';
 import Layout from 'components/layout/layout.tsx';
 import {OfferFromList} from 'types/offer.ts';
 import FavoritesList from 'components/favorites-list/favorites-list.tsx';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors.ts';
 
 type FavoritesProps={
   offers: OfferFromList[];
 }
 
 function Favorites({offers}: FavoritesProps): JSX.Element {
+
+
+  const authStatus = useAppSelector(getAuthorizationStatus);
+  console.log('Favoritesss');
+  console.log(authStatus);
+
   return (
     <Layout header={<Header/>}>
       <>

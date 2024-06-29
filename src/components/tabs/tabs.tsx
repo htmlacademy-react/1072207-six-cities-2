@@ -1,12 +1,13 @@
 import {CITIES__COORDINATES, CitiesCoordinatesKeys} from '../../const/city-points.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import cn from 'classnames';
-import {updateActiveCity} from '../../store/action.ts';
+import {updateActiveCity} from '../../store/offers-data/offers-data.slice.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
+import {getSelectedCity} from '../../store/offers-data/offers-data.selectors.ts';
 
 function Tabs(): JSX.Element {
   const dispatch = useAppDispatch();
-  const selectedCityStore: CitiesCoordinatesKeys = useAppSelector((state) => state.selectedCity);
+  const selectedCityStore: CitiesCoordinatesKeys = useAppSelector(getSelectedCity);
   const cities = Object.keys(CITIES__COORDINATES) as CitiesCoordinatesKeys[];
 
   return (

@@ -1,5 +1,9 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const/const.ts';
+// import {AppRoute, AuthorizationStatus} from '../../const/const.ts';
+import {AppRoute} from '../../const/const.ts';
+// import {ToastContainer} from 'react-toastify';
+// import {ToastContainer} from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 import Main from 'pages/main/main.tsx';
 import Login from 'pages/login/login.tsx';
@@ -9,16 +13,18 @@ import Favorites from 'pages/favorites/favorites.tsx';
 import PrivateRoute from 'components/private-route/private-route.tsx';
 
 import {useAppSelector} from 'hooks/use-app-selector.ts';
-import {OfferFromList} from '../../types/offer.ts';
-import {offers} from '../../mocks/offers.ts';
 import {store} from '../../store';
-import {fetchOffers} from '../../store/action.ts';
+// import {store} from '../../store/index.ts';
+import {loadOffersAction} from '../../store/api-actions.ts';
+import {getOffers} from '../../store/offers-data/offers-data.selectors.ts';
+import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors.ts';
+// store.dispatch(loadOffersAction());
 
-const loadOffers: OfferFromList[] = offers;
-store.dispatch(fetchOffers(loadOffers));
 
 function App(): JSX.Element {
-  const offersStore = useAppSelector((state) => state.offers);
+  const offersStore = useAppSelector(getOffers);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  // console.log(authStatus);
 
   return (
     <BrowserRouter>
@@ -26,7 +32,8 @@ function App(): JSX.Element {
         <Route path={AppRoute.Main} element={<Main />}/>
         <Route path={AppRoute.Login} element={<Login />} />
         <Route path={AppRoute.Favorites} element={
-          <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+          // <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+          <PrivateRoute>
             <Favorites offers={offersStore} />
           </PrivateRoute>
         }
