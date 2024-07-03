@@ -9,6 +9,7 @@ export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
+  Error = 'ERROR',
 }
 
 // todo проверить все ли имена используются?

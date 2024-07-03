@@ -3,11 +3,11 @@ import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import useOnClickOutside from '../../hooks/use-on-click-outside.ts';
 import sorting, {SortValue} from '../../const/sorting-const.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
-import {updateSortingPosition} from '../../store/offers-data/offers-data.slice.ts';
+import {updateSortingPosition} from '../../store/app-state/app-state.slice.ts';
 
 
 import cn from 'classnames';
-import {getSortingType} from '../../store/offers-data/offers-data.selectors.ts';
+import {getSortingType} from '../../store/app-state/app-state.selectors.ts';
 
 function Sorting() {
   const sortingPosition = useAppSelector(getSortingType);

@@ -4,7 +4,7 @@ import Map from '../map/map.tsx';
 import {OfferFromList} from '../../types/offer.ts';
 import {CitiesCoordinatesKeys} from '../../const/city-points.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
-import {getSelectedCity} from '../../store/offers-data/offers-data.selectors.ts';
+import {getSelectedCity} from '../../store/app-state/app-state.selectors.ts';
 
 type ContainerOffers = {
   relevantOffers: OfferFromList[];

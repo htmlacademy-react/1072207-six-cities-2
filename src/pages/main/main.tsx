@@ -6,27 +6,25 @@ import ContainerNotOffers from '../../components/container-not-offers/container-
 import useRelevantOffers from '../../hooks/use-relevant-offers.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import LoadingMessage from '../../components/alerts/loading-message.tsx';
-import {getErrorStatus, getOffersLoadingStatus} from '../../store/offers-data/offers-data.selectors.ts';
-import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors.ts';
+import {getStatus} from '../../store/offers-data/offers-data.selectors.ts';
+import ErrorMessage from '../../components/alerts/error-message.tsx';
+import {RequestStatus} from '../../types/request-status.ts';
 
 function Main(): JSX.Element {
   const relevantOffers = useRelevantOffers();
+  const offersStatus = useAppSelector(getStatus);
 
-  // const offersStore = useAppSelector(getOffers);
-  const loadingStatus = useAppSelector(getOffersLoadingStatus);
-  const error = useAppSelector(getErrorStatus);
-
-  const authStatus = useAppSelector(getAuthorizationStatus);
-  console.log('MAIN page');
-  console.log(authStatus);
-
-
-  if (loadingStatus && !error) {
+  if (offersStatus === RequestStatus.Loading) {
     return (
       <LoadingMessage />
     );
   }
 
+  if (offersStatus === RequestStatus.Error) {
+    return (
+      <ErrorMessage />
+    );
+  }
 
   return (
     <Layout header={<Header/>} className="page--gray page--main">

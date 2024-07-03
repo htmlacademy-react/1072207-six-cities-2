@@ -1,4 +1,5 @@
+// todo возможно перенести в апи экшн.
 export type AuthData = {
-  login: string;
+  email: string;
   password: string;
 }
