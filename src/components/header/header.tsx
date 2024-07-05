@@ -5,7 +5,11 @@ import {AuthorizationStatus} from '../../const/const.ts';
 import HeaderUserAuthorized from '../header-user-authorized/header-user-authorized.tsx';
 import HeaderUserNotAuthorized from '../header-user-not-authorized/header-user-not-authorized.tsx';
 
-function Header(): JSX.Element{
+type HeaderProps = {
+  hideAuthorized?: boolean;
+}
+
+function Header({hideAuthorized = false}: HeaderProps): JSX.Element{
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const userAuthorize = authorizationStatus === AuthorizationStatus.Auth;
 
@@ -16,9 +20,10 @@ function Header(): JSX.Element{
           <div className="header__left">
             <Logo blockName="header" />
           </div>
-          <nav className="header__nav">
-            {userAuthorize ? <HeaderUserAuthorized /> : <HeaderUserNotAuthorized/> }
-          </nav>
+          {!hideAuthorized &&
+            <nav className="header__nav">
+              {userAuthorize ? <HeaderUserAuthorized/> : <HeaderUserNotAuthorized/>}
+            </nav>}
         </div>
       </div>
     </header>

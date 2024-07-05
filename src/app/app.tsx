@@ -19,7 +19,7 @@ function App(): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || offersStatus === RequestStatus.Loading) {
     return (
       <BrowserRouter>
         <LoadingMessage />
@@ -27,13 +27,11 @@ function App(): JSX.Element {
     );
   }
 
-  if (offersStatus === RequestStatus.Loading) {
-    return (
-      <BrowserRouter>
-        <LoadingMessage />
-      </BrowserRouter>
-    );
-  }
+  // if (offersStatus === RequestStatus.Loading) {
+  //   return (
+  //     <LoadingMessage />
+  //   );
+  // }
 
   if (offersStatus === RequestStatus.Error) {
     return (

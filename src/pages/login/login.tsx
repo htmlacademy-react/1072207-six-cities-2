@@ -1,7 +1,7 @@
 import Layout from 'components/layout/layout.tsx';
 import Header from 'components/header/header.tsx';
 import {Link, useNavigate} from 'react-router-dom';
-import {AppRoute} from '../../const/const.ts';
+import {AppRoute, AuthorizationStatus} from '../../const/const.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors.ts';
 import LoginForm from '../../components/login-form/login-form.tsx';
@@ -12,13 +12,13 @@ function Login(): JSX.Element {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (authStatus === 'AUTH') {
+    if (authStatus === AuthorizationStatus.Auth) {
       navigate(AppRoute.Main);
     }
-  });
+  }, [navigate, authStatus]);
 
   return (
-    <Layout header={<Header/>} className="page--gray page--login">
+    <Layout header={<Header hideAuthorized />} className="page--gray page--login">
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <LoginForm />

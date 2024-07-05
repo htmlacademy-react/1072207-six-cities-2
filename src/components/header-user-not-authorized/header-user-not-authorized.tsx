@@ -1,11 +1,11 @@
 import {Link} from 'react-router-dom';
-import {APIRoute} from '../../const/const.ts';
+import {AppRoute} from '../../const/const.ts';
 
 function HeaderUserNotAuthorized(): JSX.Element{
   return (
     <ul className="header__nav-list">
       <li className="header__nav-item user">
-        <Link className="header__nav-link header__nav-link--profile" to={APIRoute.Login}>
+        <Link className="header__nav-link header__nav-link--profile" to={AppRoute.Login}>
           <div className="header__avatar-wrapper user__avatar-wrapper">
           </div>
           <span className="header__login">Sign in</span>

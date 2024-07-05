@@ -9,10 +9,11 @@ export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
+  RequestAuth = 'REQUEST_AUTHORIZATION',
   Error = 'ERROR',
 }
 
-// todo проверить все ли имена используются?
+// todo проверить все ли имена используются?жду то тестов.
 export enum NameSpace {
   Offers = 'OFFERS',
   User = 'USER',

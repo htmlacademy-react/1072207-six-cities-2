@@ -1,9 +1,11 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {loginAction} from '../../store/user-process/api-actions-user.ts';
-
-const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
-const PASS_REGEXP = /(?=.*[0-9])(?=.*[a-z])[a-zA-Z0-9]+/;
+import {EMAIL_REGEXP, PASS_REGEXP} from './const.ts';
+import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors.ts';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {AuthorizationStatus} from '../../const/const.ts';
+import './styles.css';
 
 function LoginForm() {
 
@@ -12,14 +14,12 @@ function LoginForm() {
     password: '',
   });
 
-  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLAnchorElement | HTMLTextAreaElement>) {
-    const name = e.target.name;
-    const inputTarget = e.target as HTMLInputElement;
-    const value: string = inputTarget.value;
+  function handleChange(evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const {name, value} = evt.target;
 
     setFormState({
       ...formState,
-      [name] : value
+      [name]: value
     });
   }
 
@@ -30,7 +30,7 @@ function LoginForm() {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (formState.email !== null && formState.password !== null && checkEmail && checkPassword) {
+    if (formState.email !== '' && formState.password !== '' && checkEmail && checkPassword) {
       dispatch(loginAction({
         email: formState.email,
         password: formState.password,
@@ -38,11 +38,16 @@ function LoginForm() {
     }
   };
 
-  // Тут возвращать при ошибке в почте или пароле ? надо ли
-  // const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  // if (authorizationStatus === AuthorizationStatus.Error) {
-  //   <ErrorMessage />
-  // }
+  const hasError = (
+    !checkPassword
+    &&
+    formState.password !== ''
+    ||
+    !checkEmail && formState.email !== ''
+  );
+
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const requestProcessed = authorizationStatus === AuthorizationStatus.RequestAuth;
 
   return (
     <section className="login">
@@ -50,7 +55,7 @@ function LoginForm() {
       <form
         className="login__form form"
         action="#"
-        // method="post"
+        method="post"
         onSubmit={handleSubmit}
       >
         <div className="login__input-wrapper form__input-wrapper">
@@ -63,6 +68,7 @@ function LoginForm() {
             onChange={handleChange}
             value={formState.email}
             required
+            disabled={requestProcessed}
           />
         </div>
         <div className="login__input-wrapper form__input-wrapper">
@@ -75,14 +81,12 @@ function LoginForm() {
             onChange={handleChange}
             value={formState.password}
             required
+            disabled={requestProcessed}
           />
         </div>
-        {(!checkPassword &&
-            formState.password !== ''
-            || !checkEmail && formState.email !== '')
-          && <div color='red'>Проверьте правильность ввода данных</div>}
+        {hasError && <div className="login__error-message" color=''>Проверьте правильность ввода данных</div>}
         <button className="login__submit form__submit button" type="submit">
-          Sign in
+          {requestProcessed ? 'Loading...' : 'Sign in' }
         </button>
       </form>
     </section>
