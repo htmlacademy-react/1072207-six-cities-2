@@ -1,9 +1,9 @@
 import {CITIES__COORDINATES, CitiesCoordinatesKeys} from '../../const/city-points.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import cn from 'classnames';
-import {updateActiveCity} from '../../store/offers-data/offers-data.slice.ts';
+import {updateActiveCity} from '../../store/app-state/app-state.slice.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
-import {getSelectedCity} from '../../store/offers-data/offers-data.selectors.ts';
+import {getSelectedCity} from '../../store/app-state/app-state.selectors.ts';
 
 function Tabs(): JSX.Element {
   const dispatch = useAppDispatch();

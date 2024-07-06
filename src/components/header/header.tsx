@@ -1,6 +1,18 @@
 import Logo from '../logo/logo.tsx';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {getAuthorizationStatus} from '../../store/user-process/user-process.selectors.ts';
+import {AuthorizationStatus} from '../../const/const.ts';
+import HeaderUserAuthorized from '../header-user-authorized/header-user-authorized.tsx';
+import HeaderUserNotAuthorized from '../header-user-not-authorized/header-user-not-authorized.tsx';
 
-function Header(): JSX.Element{
+type HeaderProps = {
+  hideAuthorized?: boolean;
+}
+
+function Header({hideAuthorized = false}: HeaderProps): JSX.Element{
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userAuthorize = authorizationStatus === AuthorizationStatus.Auth;
+
   return (
     <header className="header">
       <div className="container">
@@ -8,25 +20,10 @@ function Header(): JSX.Element{
           <div className="header__left">
             <Logo blockName="header" />
           </div>
-          <nav className="header__nav">
-            <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <a
-                  className="header__nav-link header__nav-link--profile"
-                  href="#"
-                >
-                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  <span className="header__favorite-count">3</span>
-                </a>
-              </li>
-              <li className="header__nav-item">
-                <a className="header__nav-link" href="#">
-                  <span className="header__signout">Sign out</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          {!hideAuthorized &&
+            <nav className="header__nav">
+              {userAuthorize ? <HeaderUserAuthorized/> : <HeaderUserNotAuthorized/>}
+            </nav>}
         </div>
       </div>
     </header>

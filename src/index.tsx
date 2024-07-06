@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {Provider} from 'react-redux';
 import {store} from './store';
-import App from './components/app/app.tsx';
-import {checkAuthAction, loadOffersAction} from './store/api-actions.ts';
+import App from './app/app.tsx';
+import {checkAuthAction} from './store/user-process/api-actions-user.ts';
+import {loadOffersAction} from './store/offers-data/api-actions-offers.ts';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
