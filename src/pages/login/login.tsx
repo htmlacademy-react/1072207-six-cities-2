@@ -18,7 +18,7 @@ function Login(): JSX.Element {
   }, [navigate, authStatus]);
 
   return (
-    <Layout header={<Header hideAuthorized />} className="page--gray page--login">
+    <Layout header={<Header showAuthorizationElement={false} />} className="page--gray page--login">
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <LoginForm />

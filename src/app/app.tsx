@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../const/const.ts';
 import Main from 'pages/main/main.tsx';
 import Login from 'pages/login/login.tsx';
@@ -20,41 +20,27 @@ function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || offersStatus === RequestStatus.Loading) {
-    return (
-      <BrowserRouter>
-        <LoadingMessage />
-      </BrowserRouter>
-    );
+    return <LoadingMessage />;
   }
 
-  // if (offersStatus === RequestStatus.Loading) {
-  //   return (
-  //     <LoadingMessage />
-  //   );
-  // }
-
   if (offersStatus === RequestStatus.Error) {
-    return (
-      <ErrorMessage />
-    );
+    return <ErrorMessage />;
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={AppRoute.Main} element={<Main />}/>
-        <Route path={AppRoute.Login} element={<Login />} />
-        <Route path={AppRoute.Favorites} element={
-          <PrivateRoute>
-            {/*<Favorites offers={offersStore} />*/}
-            <Favorites offers={[]} />
-          </PrivateRoute>
-        }
-        />
-        <Route path={AppRoute.Offer} element={<Offer offers={offersStore}/>}/>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path={AppRoute.Main} element={<Main />}/>
+      <Route path={AppRoute.Login} element={<Login />} />
+      <Route path={AppRoute.Favorites} element={
+        <PrivateRoute>
+          {/*<Favorites offers={offersStore} />*/}
+          <Favorites offers={[]} />
+        </PrivateRoute>
+      }
+      />
+      <Route path={AppRoute.Offer} element={<Offer offers={offersStore}/>}/>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 
