@@ -14,7 +14,7 @@ import ErrorMessage from '../components/alerts/error-message.tsx';
 import {getAuthorizationStatus} from '../store/user-process/user-process.selectors.ts';
 
 function App(): JSX.Element {
-  const offersStore = useAppSelector(getOffers);
+  // const offersStore = useAppSelector(getOffers);
   const offersStatus = useAppSelector(getStatus);
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -38,7 +38,7 @@ function App(): JSX.Element {
         </PrivateRoute>
       }
       />
-      <Route path={AppRoute.Offer} element={<Offer offers={offersStore}/>}/>
+      <Route path={AppRoute.Offer} element={<Offer />}/>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

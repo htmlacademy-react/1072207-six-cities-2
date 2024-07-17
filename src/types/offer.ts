@@ -17,7 +17,7 @@ export type Offer={
 }
 
 export type OfferCity={
-  name: string;
+  name: 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
   location: OfferLocation;
 }
 
