@@ -47,7 +47,7 @@ function PlaceCard({offer, onMouseToCard, onMouseLeaveCard, listType}: PlaceCard
     >
       {offer.isPremium && <Badge className="place-card__mark" text="Premium" />}
       <div className={`${additionalClasses}__image-wrapper place-card__image-wrapper`}>
-        <a href="#">
+        <Link to={generatePath(AppRoute.Offer, {id: offer.id})}>
           <img
             className="place-card__image"
             src={offer.previewImage}
@@ -55,7 +55,7 @@ function PlaceCard({offer, onMouseToCard, onMouseLeaveCard, listType}: PlaceCard
             height={option.height}
             alt={offer.title}
           />
-        </a>
+        </Link>
       </div>
       <div className={option.info}>
         <div className="place-card__price-wrapper">

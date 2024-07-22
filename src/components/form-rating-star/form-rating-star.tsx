@@ -1,22 +1,27 @@
 import {ChangeEvent} from 'react';
 
 type FormStarRatingProps={
-  defaultValue: number;
+  value: number;
   id: string;
   title: string;
-  onSetHandler: (e: ChangeEvent<HTMLInputElement | HTMLAnchorElement | HTMLTextAreaElement>) => void;
+  onSetHandler: (e: ChangeEvent<HTMLInputElement>) => void;
+  disabled: boolean;
+  rating: number;
 }
 
-export function FormRatingStar({defaultValue, id, title, onSetHandler}: FormStarRatingProps) {
+export function FormRatingStar({value, id, title, onSetHandler, disabled, rating}: FormStarRatingProps) {
+  const isChecked = value === +rating;
   return (
     <>
       <input
         className="form__rating-input visually-hidden"
         name="rating"
-        defaultValue={defaultValue}
+        value={value}
         id={id}
         type="radio"
         onChange={onSetHandler}
+        disabled={disabled}
+        checked={isChecked}
       />
       <label
         htmlFor={id}

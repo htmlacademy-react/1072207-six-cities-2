@@ -1,8 +1,9 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {Offer, OfferFromList} from '../../types/offer.ts';
-import {ThunkOptions} from '../../types/state.ts';
+import {AppDispatch, State, ThunkOptions} from '../../types/state.ts';
 import {APIRoute} from '../../const/const.ts';
 import {Review} from '../../types/review.ts';
+import {AxiosInstance} from 'axios';
 
 type TExportComment = {
   id: string;
@@ -34,20 +35,19 @@ export const loadCommentsToOfferAction = createAsyncThunk<Review[], string, Thun
   },
 );
 
-export const sendingCommentAction = createAsyncThunk<Review, TExportComment, ThunkOptions>(
+export const sendingCommentAction = createAsyncThunk<Review, TExportComment, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
   'data/sendingCommentAction',
-  async ({id, comment, rating}, {extra: api}) => {
-    // console.log(id);
-    // console.log(comment);
-    // console.log(rating);
+  async ({id, comment, rating}, {extra: api, dispatch}) => {
     const sendComment = {
       'comment': comment,
       'rating': rating
     };
-    // console.log(sendComment);
-    // const {data} = await api.post<Review>(`${APIRoute.Comments}/${id}`, {comment, rating});
     const {data} = await api.post<Review>(`${APIRoute.Comments}/${id}`, sendComment);
-    // console.log(data);
+    dispatch(loadCommentsToOfferAction(id));
     return data;
   },
 );

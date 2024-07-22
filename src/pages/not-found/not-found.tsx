@@ -3,7 +3,7 @@ import styles from './not-found.module.css';
 import Layout from 'components/layout/layout.tsx';
 import Header from 'components/header/header.tsx';
 
-function NotFound(): JSX.Element {
+function ErrorPage(): JSX.Element {
   return (
     <Layout header={<Header/>}>
       <div className={styles.container}>
@@ -14,4 +14,4 @@ function NotFound(): JSX.Element {
   );
 }
 
-export default NotFound;
+export default ErrorPage;

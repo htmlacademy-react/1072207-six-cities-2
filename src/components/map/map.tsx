@@ -7,6 +7,8 @@ import {OfferFromList} from '../../types/offer.ts';
 import {CitiesCoordinatesKeys, CITIES__COORDINATES} from '../../const/city-points.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {getIdActiveOffer} from '../../store/app-state/app-state.selectors.ts';
+import './styles.css';
+import {getOffer} from '../../store/offer-page-data/offer-page-data.selectors.ts';
 
 type CityCoordinates = {
     latitude: number;
@@ -37,6 +39,16 @@ function Map(props: MapProps){
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
   const selectedCardIdOfferStore = useAppSelector(getIdActiveOffer);
+  const offerLoad = useAppSelector(getOffer);
+  let cardIdToMainMarker = '';
+
+  if (className === 'offer__map' && offerLoad) {
+    cardIdToMainMarker = offerLoad.id;
+  }
+
+  if (className === 'cities__map') {
+    cardIdToMainMarker = selectedCardIdOfferStore;
+  }
 
   useEffect(() => {
 
@@ -49,19 +61,29 @@ function Map(props: MapProps){
         }
 
         const marker = new Marker({
-          lat: offer.city.location.latitude,
-          lng: offer.city.location.longitude
+          lat: offer.location.latitude,
+          lng: offer.location.longitude
         }, {
           icon: iconToMarker,
         });
         marker.addTo(markerLayer);
       });
 
+      if (className === 'offer__map' && offerLoad) {
+        const marker = new Marker({
+          lat: offerLoad.location.latitude,
+          lng: offerLoad.location.longitude
+        }, {
+          icon: activeCustomIcon,
+        });
+        marker.addTo(markerLayer);
+      }
+
       return () => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [offers, map, selectedCardIdOfferStore]);
+  }, [offers, map, cardIdToMainMarker]);
 
   useEffect(() => {
     if (map) {
@@ -79,7 +101,6 @@ function Map(props: MapProps){
   return (
     <section
       className={cn('map', className)}
-      style={{height: '100%'}}
       ref={mapRef}
     />
   );

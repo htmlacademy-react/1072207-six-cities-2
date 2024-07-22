@@ -3,11 +3,11 @@ import {AppRoute, AuthorizationStatus} from '../const/const.ts';
 import Main from 'pages/main/main.tsx';
 import Login from 'pages/login/login.tsx';
 import Offer from 'pages/offer/offer.tsx';
-import NotFound from 'pages/not-found/not-found.tsx';
+import ErrorPage from 'pages/not-found/not-found.tsx';
 import Favorites from 'pages/favorites/favorites.tsx';
 import PrivateRoute from 'components/private-route/private-route.tsx';
 import {useAppSelector} from 'hooks/use-app-selector.ts';
-import {getOffers, getStatus} from '../store/offers-data/offers-data.selectors.ts';
+import {getStatus} from '../store/offers-data/offers-data.selectors.ts';
 import {RequestStatus} from '../types/request-status.ts';
 import LoadingMessage from '../components/alerts/loading-message.tsx';
 import ErrorMessage from '../components/alerts/error-message.tsx';
@@ -39,7 +39,7 @@ function App(): JSX.Element {
       }
       />
       <Route path={AppRoute.Offer} element={<Offer />}/>
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
 }

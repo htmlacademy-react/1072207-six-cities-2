@@ -13,6 +13,7 @@ import {Review} from '../../types/review.ts';
 type OfferPageDataSlice = {
   offer: Offer | null;
   offerStatus: RequestStatus;
+  offerStatusMessage: string;
   offersNearby: OfferFromList[];
   offersNearbyStatus: RequestStatus;
   offerComments: Review[];
@@ -24,6 +25,7 @@ type OfferPageDataSlice = {
 const initialState: OfferPageDataSlice = {
   offer: null,
   offerStatus: RequestStatus.Idle,
+  offerStatusMessage: '',
   offersNearby: [],
   offersNearbyStatus: RequestStatus.Idle,
   offerComments: [],
@@ -45,7 +47,12 @@ export const offerPageData = createSlice({
         state.offer = action.payload;
         state.offerStatus = RequestStatus.Success;
       })
-      .addCase(loadOfferAction.rejected, (state) => {
+      .addCase(loadOfferAction.rejected, (state, action) => {
+        let message = '';
+        if (action.error.message && action.error.code) {
+          message = `Oшибка ${action.error.message} Код ${action.error.code}`;
+        }
+        state.offerStatusMessage = message;
         state.offerStatus = RequestStatus.Error;
       })
       .addCase(loadNearbyOffersAction.pending, (state) => {
@@ -60,32 +67,23 @@ export const offerPageData = createSlice({
       })
       .addCase(loadCommentsToOfferAction.pending, (state) => {
         state.offerCommentsStatus = RequestStatus.Loading;
-        // console.log('Загрузка comments');
       })
       .addCase(loadCommentsToOfferAction.fulfilled, (state, action) => {
         state.offerComments = action.payload;
         state.offerCommentsStatus = RequestStatus.Success;
-        // console.log('comments загружены');
-        // console.log(state.offersNearby);
       })
       .addCase(loadCommentsToOfferAction.rejected, (state) => {
         state.offerCommentsStatus = RequestStatus.Error;
-        // console.log('Произошла ошибка при загрузке comments');
       })
       .addCase(sendingCommentAction.pending, (state) => {
         state.sendingCommentStatus = RequestStatus.Loading;
-        // console.log('Отправка comment');
       })
       .addCase(sendingCommentAction.fulfilled, (state, action) => {
         state.sendingComment = action.payload;
         state.sendingCommentStatus = RequestStatus.Success;
-        // console.log('comment отправлен');
-        // console.log('comment ответ от сервера:');
-        // console.log(state.sendingComment);
       })
       .addCase(sendingCommentAction.rejected, (state) => {
         state.sendingCommentStatus = RequestStatus.Error;
-        // console.log('Произошла ошибка при отправке comment');
       });
   }
 });
