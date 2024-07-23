@@ -1,5 +1,5 @@
 export type StarItem={
-  defaultValue: number;
+  value: number;
   id: string;
   title: string;
 }
@@ -8,27 +8,27 @@ export type StarsList = StarItem[];
 
 export const starsList: StarsList = [
   {
-    defaultValue: 5,
+    value: 5,
     id: '5-star',
     title: 'perfect',
   },
   {
-    defaultValue: 4,
+    value: 4,
     id: '4-star',
     title: 'good',
   },
   {
-    defaultValue: 3,
+    value: 3,
     id: '3-star',
     title: 'not bad',
   },
   {
-    defaultValue: 2,
+    value: 2,
     id: '2-star',
     title: 'badly',
   },
   {
-    defaultValue: 1,
+    value: 1,
     id: '1-star',
     title: 'terribly',
   },

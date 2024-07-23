@@ -1,0 +1,13 @@
+.offer__map {
+  width: 100%;
+  height: 579px;
+  margin-bottom: 50px;
+  /*background-image: url(../img/map-big.jpg);*/
+  background-repeat: no-repeat;
+  background-size: 1144px auto;
+  background-position: center top;
+}
+
+.cities__map {
+  height: 100%;
+}

@@ -1,47 +1,78 @@
-import {ChangeEvent, useState} from 'react';
-import {StarsList, starsList} from 'components/form-rating-star/const.ts';
-import {FormRatingStar} from 'components/form-rating-star/form-rating-star.tsx';
+import {ChangeEvent, FormEvent, useState} from 'react';
+import {starsList} from 'components/form-rating-star/const.ts';
+import FormRating from '../form-rating/form-rating.tsx';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
+import {useEffect} from 'react';
+import {sendingCommentAction} from '../../store/offer-page-data/api-actions-offer.ts';
+import {useParams} from 'react-router-dom';
+import './styles.css';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {getStatusSendingComment} from '../../store/offer-page-data/offer-page-data.selectors.ts';
+import {RequestStatus} from '../../types/request-status.ts';
+import {RANGE_VALUES} from '../../pages/offer/const.ts';
 
 function ReviewsForm() {
-
+  const dispatch = useAppDispatch();
+  const { id } = useParams<{id: string}>();
+  const statusCommentSending = useAppSelector(getStatusSendingComment);
+  const isSuccess = statusCommentSending === RequestStatus.Success;
+  const isPending = statusCommentSending === RequestStatus.Loading;
+  const isError = statusCommentSending === RequestStatus.Error;
   const [formState, setFormState] = useState({
-    rating: '',
+    rating: 0,
     review: '',
   });
+  const [formNotFirstRender, setNotFormFirstRender] = useState(false);
 
-  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLAnchorElement | HTMLTextAreaElement>) {
-    const name = e.target.name;
-    const inputTarget = e.target as HTMLInputElement;
-    const value: string = inputTarget.value;
+  useEffect(() => {
+    if (isSuccess) {
+      setFormState({
+        rating: 0,
+        review: '',
+      });
+      setNotFormFirstRender(false);
+    }
+  }, [statusCommentSending]);
 
+  const isFormNotValid =
+    formState.review.length < RANGE_VALUES.MinLetters
+    || formState.review.length > RANGE_VALUES.MaxLetters
+    || formState.rating === 0;
+
+  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+    const {name, value} = e.target;
     setFormState({
       ...formState,
       [name] : value
     });
+    setNotFormFirstRender(true);
   }
 
-  type FormRatingProps={
-    starsArr: StarsList;
-  }
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
 
-  function FormRating({starsArr}: FormRatingProps) {
-    return (
-      <div className="reviews__rating-form form__rating">
-        {
-          starsArr.map((item) =>
-            <FormRatingStar key={item.id} defaultValue={item.defaultValue} id={item.id} onSetHandler={handleChange} title={item.title}/>
-          )
-        }
-      </div>
-    );
-  }
+    if (id !== undefined) {
+      dispatch(sendingCommentAction({
+        id: id,
+        comment: formState.review,
+        rating: +formState.rating,
+      })
+      );
+    }
+  };
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
+        {(isFormNotValid && formNotFirstRender) && <div className="reviews__form-error" color='red'>Длинна отзыва от 50 до 300 символов, рейтинг от 1 до 5</div>}
       </label>
-      <FormRating starsArr={starsList}/>
+      <FormRating starsArr={starsList} handleChange={handleChange} disabled={isPending} rating={formState.rating}/>
+      {isError && <div className="reviews__form-error" color='red'>Возникла ошибка, перезагрузите страницу и попробуйте снова.</div>}
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
@@ -49,18 +80,22 @@ function ReviewsForm() {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formState.review}
         onChange={handleChange}
+        minLength={RANGE_VALUES.MinLetters}
+        maxLength={RANGE_VALUES.MaxLetters}
+        disabled={isPending}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span> and describe
           your stay with at least{' '}
-          <b className="reviews__text-amount">50 characters</b>.
+          <b className="reviews__text-amount">{RANGE_VALUES.MinLetters} characters</b>.
         </p>
+
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={isFormNotValid || isPending}
         >
           Submit
         </button>

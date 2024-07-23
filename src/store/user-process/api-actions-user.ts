@@ -8,7 +8,6 @@ import {dropToken, saveToken} from '../../services/token.ts';
 export const checkAuthAction = createAsyncThunk<UserData, undefined, ThunkOptions>(
   'user/checkAuth',
   async (_arg, {extra: api}) => {
-    // await api.get(APIRoute.Login);
     const {data} = await api.get<UserData>(APIRoute.Login);
     return data;
   },
