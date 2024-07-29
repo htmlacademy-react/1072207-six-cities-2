@@ -1,8 +1,9 @@
 import {CitiesCoordinatesKeys} from '../../const/city-points.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {getSelectedCity} from '../../store/app-state/app-state.selectors.ts';
 
 function ContainerNotOffers() {
-  const selectedCityStore: CitiesCoordinatesKeys = useAppSelector((state) => state.selectedCity);
+  const selectedCityStore: CitiesCoordinatesKeys = useAppSelector(getSelectedCity);
 
   return (
     <div className="cities__places-container cities__places-container--empty container">

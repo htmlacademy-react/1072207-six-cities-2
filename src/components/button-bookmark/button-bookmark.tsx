@@ -1,8 +1,13 @@
 import cn from 'classnames';
+import {useEffect, useState} from 'react';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
+import {sendingFavoritesStatusAction} from '../../store/favorites-process/api-actions-favorites.ts';
+import {FAVORITE_STATUS} from '../../const/favorite-status.ts';
 
 type ButtonBookmarkProps={
   isFavorite: boolean;
   modifier: 'offer' | 'card' ;
+  offerId: string;
 }
 
 const pageOptions = {
@@ -22,16 +27,36 @@ const pageOptions = {
   },
 };
 
-function ButtonBookmark({isFavorite, modifier}: ButtonBookmarkProps): JSX.Element {
+function ButtonBookmark({isFavorite, modifier, offerId}: ButtonBookmarkProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const size = pageOptions[modifier].sizes;
+
+  const [favoriteStatus, setFavoriteStatus] = useState<boolean>();
+  useEffect(() => {
+    setFavoriteStatus(isFavorite);
+  }, [isFavorite]);
+
+  const changeStatusFavorite = () => {
+    if (favoriteStatus === false) {
+      setFavoriteStatus(!favoriteStatus);
+      dispatch(sendingFavoritesStatusAction({offerId, status: FAVORITE_STATUS.AdToFavorite}));
+    }
+
+    if (favoriteStatus === true) {
+      setFavoriteStatus(!favoriteStatus);
+      dispatch(sendingFavoritesStatusAction({offerId, status: FAVORITE_STATUS.RemoveOfferToFavorite}));
+    }
+  };
+
   const additionalClass = cn(
     `${pageOptions[modifier].modifierClass}__bookmark-button button`,
-    {[`${pageOptions[modifier].modifierClass}__bookmark-button--active`]: isFavorite}
+    {[`${pageOptions[modifier].modifierClass}__bookmark-button--active`]: favoriteStatus}
   );
 
   return (
     <button className={additionalClass}
       type="button"
+      onClick={changeStatusFavorite}
     >
       <svg
         className={`${pageOptions[modifier].modifierClass}__bookmark-icon`}
@@ -41,7 +66,7 @@ function ButtonBookmark({isFavorite, modifier}: ButtonBookmarkProps): JSX.Elemen
         <use xlinkHref="#icon-bookmark"/>
       </svg>
       <span className="visually-hidden">
-        {isFavorite ? 'In bookmarks' : 'To bookmarks'}
+        {favoriteStatus ? 'In bookmarks' : 'To bookmarks'}
       </span>
     </button>
   );
