@@ -2,21 +2,10 @@ import Logo from 'components/logo/logo.tsx';
 import Header from 'components/header/header.tsx';
 import Layout from 'components/layout/layout.tsx';
 import FavoritesList from 'components/favorites-list/favorites-list.tsx';
-import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
-import {loadFavoritesOffersAction} from '../../store/favorites-process/api-actions-favorites.ts';
-import {useEffect} from 'react';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
-import {getFavoriteOffers, getSendingStatus} from '../../store/favorites-process/favorites-process.selectors.ts';
+import {getFavoriteOffers} from '../../store/favorites-process/favorites-process.selectors.ts';
 
 function Favorites(): JSX.Element {
-
-  const dispatch = useAppDispatch();
-  // dispatch(loadFavoritesOffersAction());
-  const sendingFavoriteOffersStatus = useAppSelector(getSendingStatus);
-  useEffect(() => {
-    dispatch(loadFavoritesOffersAction());
-  }, [sendingFavoriteOffersStatus]);
-
   const favoriteOffers = useAppSelector(getFavoriteOffers);
 
   return (

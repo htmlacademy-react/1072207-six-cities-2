@@ -17,16 +17,14 @@ export const loadFavoritesOffersAction = createAsyncThunk<OfferFromList[], undef
   },
 );
 
-export const sendingFavoritesStatusAction = createAsyncThunk<void, TExportStatus, {
+export const sendingFavoritesStatusAction = createAsyncThunk<OfferFromList, TExportStatus, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/sendingFavoritesStatusAction',
   async ({offerId, status}, {extra: api}) => {
-    // const response = await api.post<AxiosResponse>(`${APIRoute.Favorite}/${offerId}/${status}`);
-    await api.post(`${APIRoute.Favorite}/${offerId}/${status}`);
-    // console.log(response);
-    // return response;
+    const {data} = await api.post<OfferFromList>(`${APIRoute.Favorite}/${offerId}/${status}`);
+    return data;
   },
 );

@@ -1,11 +1,16 @@
 import cn from 'classnames';
-import {useEffect, useState} from 'react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {sendingFavoritesStatusAction} from '../../store/favorites-process/api-actions-favorites.ts';
 import {FAVORITE_STATUS} from '../../const/favorite-status.ts';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {getIsAuth} from '../../store/user-process/user-process.selectors.ts';
+import {useNavigate} from 'react-router-dom';
+import {AppRoute} from '../../const/const.ts';
+import {
+  getFavoriteOffers,
+} from '../../store/favorites-process/favorites-process.selectors.ts';
 
 type ButtonBookmarkProps={
-  isFavorite: boolean;
   modifier: 'offer' | 'card' ;
   offerId: string;
 }
@@ -27,26 +32,41 @@ const pageOptions = {
   },
 };
 
-function ButtonBookmark({isFavorite, modifier, offerId}: ButtonBookmarkProps): JSX.Element {
+function ButtonBookmark({modifier, offerId}: ButtonBookmarkProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const size = pageOptions[modifier].sizes;
+  const navigate = useNavigate();
+  const isAuth = useAppSelector(getIsAuth);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
 
-  const [favoriteStatus, setFavoriteStatus] = useState<boolean>();
-  useEffect(() => {
-    setFavoriteStatus(isFavorite);
-  }, [isFavorite]);
+  const size = pageOptions[modifier].sizes;
+  let favoriteStatus = false;
+
+  const isFavoriteOffer = (id: string) => favoriteOffers.some((offer) => offer.id === id);
+
+  if (isAuth) {
+    favoriteStatus = isFavoriteOffer(offerId);
+  }
 
   const changeStatusFavorite = () => {
-    if (favoriteStatus === false) {
-      setFavoriteStatus(!favoriteStatus);
-      dispatch(sendingFavoritesStatusAction({offerId, status: FAVORITE_STATUS.AdToFavorite}));
+    if (!isAuth) {
+      navigate(AppRoute.Login);
     }
 
-    if (favoriteStatus === true) {
-      setFavoriteStatus(!favoriteStatus);
-      dispatch(sendingFavoritesStatusAction({offerId, status: FAVORITE_STATUS.RemoveOfferToFavorite}));
+    if (isAuth) {
+      // if (!favoriteStatus) {
+      //   dispatch(sendingFavoritesStatusAction({offerId, status: FAVORITE_STATUS.AdToFavorite}));
+      // }
+      //
+      // if (favoriteStatus) {
+      //   dispatch(sendingFavoritesStatusAction({offerId, status: FAVORITE_STATUS.RemoveOfferToFavorite}));
+      // }
+
+      const status = favoriteStatus ? FAVORITE_STATUS.RemoveOfferToFavorite : FAVORITE_STATUS.AdToFavorite;
+      dispatch(sendingFavoritesStatusAction({offerId, status: status}));
     }
   };
+
+
 
   const additionalClass = cn(
     `${pageOptions[modifier].modifierClass}__bookmark-button button`,

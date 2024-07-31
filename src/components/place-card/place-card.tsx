@@ -39,10 +39,6 @@ function PlaceCard({offer, onMouseToCard, onMouseLeaveCard, listType}: PlaceCard
   const option = options[listType];
   const additionalClasses: string = option.classToPlaceCard;
 
-  // console.log(offer);
-  // console.log(additionalClasses);
-
-
   return (
     <article className={`${additionalClasses}__card place-card`}
       onMouseOver={onMouseToCard}
@@ -67,7 +63,7 @@ function PlaceCard({offer, onMouseToCard, onMouseLeaveCard, listType}: PlaceCard
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <ButtonBookmark isFavorite={offer.isFavorite} modifier='card' offerId={offer.id}/>
+          <ButtonBookmark modifier="card" offerId={offer.id}/>
         </div>
         <Rating rating={offer.rating} calculusSystem={5} className={'place-card'} />
         <h2 className="place-card__name">
