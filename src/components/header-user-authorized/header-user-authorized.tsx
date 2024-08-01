@@ -4,14 +4,15 @@ import {logoutAction} from '../../store/user-process/api-actions-user.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {getUserEmail} from '../../store/user-process/user-process.selectors.ts';
+import {getFavoriteOffers} from '../../store/favorites-process/favorites-process.selectors.ts';
 
 function HeaderUserAuthorized(): JSX.Element{
   const dispatch = useAppDispatch();
   const handleSignOut = () => {
     dispatch(logoutAction());
   };
-
   const userEmail = useAppSelector(getUserEmail);
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
 
   return (
     <ul className="header__nav-list">
@@ -22,7 +23,7 @@ function HeaderUserAuthorized(): JSX.Element{
         >
           <div className="header__avatar-wrapper user__avatar-wrapper"></div>
           <span className="header__user-name user__name">{userEmail}</span>
-          <span className="header__favorite-count">333</span>
+          <span className="header__favorite-count">{favoriteOffers.length}</span>
         </Link>
       </li>
       <li className="header__nav-item">

@@ -10,7 +10,6 @@ type ContainerOffers = {
   relevantOffers: OfferFromList[];
 }
 
-
 function ContainerOffers({relevantOffers}: ContainerOffers) {
   const selectedCityStore: CitiesCoordinatesKeys = useAppSelector(getSelectedCity);
 

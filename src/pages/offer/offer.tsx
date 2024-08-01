@@ -77,7 +77,8 @@ function Offer(): JSX.Element | null {
                   {offerLoad.title}
                 </h1>
 
-                <ButtonBookmark isFavorite={offerLoad.isFavorite} modifier='offer'/>
+                <ButtonBookmark modifier='offer' offerId={offerLoad.id}/>
+                {/*<ButtonBookmark isFavorite={offerLoad.isFavorite} modifier='offer' offerId={offerLoad.id}/>*/}
 
               </div>
 

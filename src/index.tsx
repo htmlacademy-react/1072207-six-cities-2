@@ -8,9 +8,11 @@ import {checkAuthAction} from './store/user-process/api-actions-user.ts';
 import {loadOffersAction} from './store/offers-data/api-actions-offers.ts';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {loadFavoritesOffersAction} from './store/favorites-process/api-actions-favorites.ts';
 
 store.dispatch(loadOffersAction());
 store.dispatch(checkAuthAction());
+store.dispatch(loadFavoritesOffersAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

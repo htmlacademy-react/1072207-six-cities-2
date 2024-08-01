@@ -92,10 +92,8 @@ function Map(props: MapProps){
         longitude: CITIES__COORDINATES[city].longitude,
         zoom: CITIES__COORDINATES[city].zoom,
       };
-
       map.setView([cityCoordinates.latitude, cityCoordinates.longitude], cityCoordinates.zoom);
     }
-
   }, [map, city]);
 
   return (

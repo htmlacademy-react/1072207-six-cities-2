@@ -14,9 +14,7 @@ import ErrorMessage from '../components/alerts/error-message.tsx';
 import {getAuthorizationStatus} from '../store/user-process/user-process.selectors.ts';
 
 function App(): JSX.Element {
-  // const offersStore = useAppSelector(getOffers);
   const offersStatus = useAppSelector(getStatus);
-
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || offersStatus === RequestStatus.Loading) {
@@ -33,8 +31,7 @@ function App(): JSX.Element {
       <Route path={AppRoute.Login} element={<Login />} />
       <Route path={AppRoute.Favorites} element={
         <PrivateRoute>
-          {/*<Favorites offers={offersStore} />*/}
-          <Favorites offers={[]} />
+          <Favorites />
         </PrivateRoute>
       }
       />
