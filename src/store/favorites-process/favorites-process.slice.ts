@@ -43,9 +43,7 @@ export const FavoritesProcess = createSlice({
 
         if (state.favoritesSandingOffer.isFavorite) {
           state.favoritesOffers.push(state.favoritesSandingOffer);
-        }
-
-        if (!state.favoritesSandingOffer.isFavorite) {
+        } else {
           const id = action.payload.id;
           state.favoritesOffers = state.favoritesOffers.filter((offer)=>offer.id !== id);
         }

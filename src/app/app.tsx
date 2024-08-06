@@ -11,11 +11,24 @@ import {getStatus} from '../store/offers-data/offers-data.selectors.ts';
 import {RequestStatus} from '../types/request-status.ts';
 import LoadingMessage from '../components/alerts/loading-message.tsx';
 import ErrorMessage from '../components/alerts/error-message.tsx';
-import {getAuthorizationStatus} from '../store/user-process/user-process.selectors.ts';
+import {getAuthorizationStatus, getIsAuth} from '../store/user-process/user-process.selectors.ts';
+import {loadFavoritesOffersAction} from '../store/favorites-process/api-actions-favorites.ts';
+import {useAppDispatch} from '../hooks/use-app-dispatch.ts';
+import {useEffect} from 'react';
+
 
 function App(): JSX.Element {
   const offersStatus = useAppSelector(getStatus);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isAuth = useAppSelector(getIsAuth);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(loadFavoritesOffersAction());
+    }
+  }, [authorizationStatus]);
+
 
   if (authorizationStatus === AuthorizationStatus.Unknown || offersStatus === RequestStatus.Loading) {
     return <LoadingMessage />;

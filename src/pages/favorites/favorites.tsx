@@ -1,9 +1,10 @@
 import Logo from 'components/logo/logo.tsx';
 import Header from 'components/header/header.tsx';
 import Layout from 'components/layout/layout.tsx';
-import FavoritesList from 'components/favorites-list/favorites-list.tsx';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {getFavoriteOffers} from '../../store/favorites-process/favorites-process.selectors.ts';
+import FavoritesSection from '../../components/favorites-section/favorites-section.tsx';
+import FavoritesEmptySection from '../../components/favorites-empty-section/favorites-empty-section.tsx';
 
 function Favorites(): JSX.Element {
   const favoriteOffers = useAppSelector(getFavoriteOffers);
@@ -13,10 +14,7 @@ function Favorites(): JSX.Element {
       <>
         <main className="page__main page__main--favorites">
           <div className="page__favorites-container container">
-            <section className="favorites">
-              <h1 className="favorites__title">Saved listing</h1>
-              <FavoritesList offers={favoriteOffers} />
-            </section>
+            {favoriteOffers.length > 0 ? <FavoritesSection /> : <FavoritesEmptySection />}
           </div>
         </main>
         <footer className="footer container">
