@@ -14,6 +14,7 @@ import {ErrorBoundary} from 'react-error-boundary';
 import {Suspense} from 'react';
 
 import Main from 'pages/main/main.tsx';
+
 const Login = lazy(() => import('pages/login/login'));
 const Favorites = lazy(() => import('../pages/favorites/favorites.tsx'));
 const Offer = lazy(() => import('pages/offer/offer'));
