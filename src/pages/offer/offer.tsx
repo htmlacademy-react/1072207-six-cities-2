@@ -78,7 +78,6 @@ function Offer(): JSX.Element | null {
                 </h1>
 
                 <ButtonBookmark modifier='offer' offerId={offerLoad.id}/>
-                {/*<ButtonBookmark isFavorite={offerLoad.isFavorite} modifier='offer' offerId={offerLoad.id}/>*/}
 
               </div>
 
@@ -113,7 +112,7 @@ function Offer(): JSX.Element | null {
               <section className="offer__reviews reviews">
 
                 <h2 className="reviews__title">
-                  ReviewsForm · <span className="reviews__amount">{comments.length}</span>
+                  Reviews · <span className="reviews__amount">{comments.length}</span>
                 </h2>
 
                 <ReviewsList reviews={comments}/>

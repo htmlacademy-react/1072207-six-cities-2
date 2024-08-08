@@ -5,7 +5,6 @@ import sorting, {SortValue} from '../../const/sorting-const.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {updateSortingPosition} from '../../store/app-state/app-state.slice.ts';
 
-
 import cn from 'classnames';
 import {getSortingType} from '../../store/app-state/app-state.selectors.ts';
 
