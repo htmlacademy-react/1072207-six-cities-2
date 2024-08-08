@@ -13,16 +13,12 @@ export enum AuthorizationStatus {
   Error = 'ERROR',
 }
 
-// todo проверить все ли имена используются?жду то тестов.
 export enum NameSpace {
   Offers = 'OFFERS',
   User = 'USER',
   App = 'APP',
-  Main = 'MAIN',
   Offer = 'OFFER',
-  NearPlaces = 'NEAR_PLACES',
   Favorites = 'FAVORITES',
-  Reviews = 'REVIEWS',
 }
 
 export enum APIRoute {

@@ -53,20 +53,10 @@ function ButtonBookmark({modifier, offerId}: ButtonBookmarkProps): JSX.Element {
     }
 
     if (isAuth) {
-      // if (!favoriteStatus) {
-      //   dispatch(sendingFavoritesStatusAction({offerId, status: FAVORITE_STATUS.AdToFavorite}));
-      // }
-      //
-      // if (favoriteStatus) {
-      //   dispatch(sendingFavoritesStatusAction({offerId, status: FAVORITE_STATUS.RemoveOfferToFavorite}));
-      // }
-
       const status = favoriteStatus ? FAVORITE_STATUS.RemoveOfferToFavorite : FAVORITE_STATUS.AdToFavorite;
       dispatch(sendingFavoritesStatusAction({offerId, status: status}));
     }
   };
-
-
 
   const additionalClass = cn(
     `${pageOptions[modifier].modifierClass}__bookmark-button button`,

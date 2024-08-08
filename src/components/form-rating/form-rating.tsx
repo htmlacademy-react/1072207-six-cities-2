@@ -14,15 +14,16 @@ function FormRating({starsArr, handleChange, disabled, rating}: FormRatingProps)
     <div className="reviews__rating-form form__rating">
       {
         starsArr.map((item) =>
-          (<FormRatingStar
-            key={item.id}
-            value={item.value}
-            id={item.id}
-            onSetHandler={handleChange}
-            title={item.title}
-            disabled={disabled}
-            rating={rating}
-           />
+          (
+            <FormRatingStar
+              key={item.id}
+              value={item.value}
+              id={item.id}
+              onSetHandler={handleChange}
+              title={item.title}
+              disabled={disabled}
+              rating={rating}
+            />
           )
         )
       }

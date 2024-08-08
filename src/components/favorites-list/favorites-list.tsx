@@ -1,13 +1,12 @@
 import FavoritesLocationItem from 'components/favorites-location-item/favorites-location-item.tsx';
-import {OfferFromList} from 'types/offer.ts';
 import {getGroupedCities} from './utils.ts';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {getFavoriteOffers} from '../../store/favorites-process/favorites-process.selectors.ts';
 
-type FavoritesListProps={
-  offers: OfferFromList[];
-}
+function FavoritesList() {
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const uniqueCitiesMap = getGroupedCities(favoriteOffers);
 
-function FavoritesList({offers} : FavoritesListProps) {
-  const uniqueCitiesMap = getGroupedCities(offers);
   return (
     <ul className="favorites__list">
       {

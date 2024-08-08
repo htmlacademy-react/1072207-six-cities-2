@@ -9,7 +9,8 @@ import LoadingMessage from '../../components/alerts/loading-message.tsx';
 import {getStatus} from '../../store/offers-data/offers-data.selectors.ts';
 import ErrorMessage from '../../components/alerts/error-message.tsx';
 import {RequestStatus} from '../../types/request-status.ts';
-
+import {ErrorBoundary} from 'react-error-boundary';
+import cn from 'classnames';
 function Main(): JSX.Element {
   const relevantOffers = useRelevantOffers();
   const offersStatus = useAppSelector(getStatus);
@@ -26,15 +27,23 @@ function Main(): JSX.Element {
     );
   }
 
+  const additionalClass = cn(
+    'page__main page__main--index',
+    {['page__main--index-empty']: relevantOffers.length === 0}
+  );
+
   return (
     <Layout header={<Header/>} className="page--gray page--main">
-      <main className="page__main page__main--index">
+      <main className={additionalClass}>
         <h1 className="visually-hidden">Cities</h1>
         <Tabs />
-        <div className="cities">
-          {(relevantOffers.length === 0) && <ContainerNotOffers/>}
-          {(relevantOffers.length !== 0) && <ContainerOffers relevantOffers={relevantOffers} />}
-        </div>
+        <ErrorBoundary fallback={<div color={'red'} className='container'>Something went wrong to offers on this page</div>}>
+          <div className="cities">
+            {(relevantOffers.length === 0) && <ContainerNotOffers/>}
+            {(relevantOffers.length !== 0) && <ContainerOffers relevantOffers={relevantOffers}/>}
+          </div>
+        </ErrorBoundary>
+
       </main>
     </Layout>
   );

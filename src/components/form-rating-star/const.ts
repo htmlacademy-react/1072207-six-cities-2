@@ -9,22 +9,22 @@ export type StarsList = StarItem[];
 export const starsList: StarsList = [
   {
     value: 5,
-    id: '5-star',
+    id: '5-stars',
     title: 'perfect',
   },
   {
     value: 4,
-    id: '4-star',
+    id: '4-stars',
     title: 'good',
   },
   {
     value: 3,
-    id: '3-star',
+    id: '3-stars',
     title: 'not bad',
   },
   {
     value: 2,
-    id: '2-star',
+    id: '2-stars',
     title: 'badly',
   },
   {
