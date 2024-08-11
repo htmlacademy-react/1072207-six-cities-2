@@ -1,6 +1,6 @@
 import {Review} from '../../types/review.ts';
 import ReviewsItem from '../reviews-item/reviews-item.tsx';
-import {REVIEWS} from '../../const/reviews.ts';
+import {MAX_REVIEWS_TO_PAGE} from '../../const/reviews.ts';
 
 type ReviewsListProps={
   reviews: Review[];
@@ -13,7 +13,7 @@ function ReviewsList({reviews} : ReviewsListProps) {
     <ul className="reviews__list">
       {
         sortedReviews.map((item, index) => {
-          if (index < REVIEWS.MaxReviewsToPage) {
+          if (index < MAX_REVIEWS_TO_PAGE) {
             return <ReviewsItem key={item.id} review={item} />;
           }
         }

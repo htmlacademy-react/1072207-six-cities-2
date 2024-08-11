@@ -1,6 +1,6 @@
-export enum RANGE_VALUES {
-  MinLetters = 50,
-  MaxLetters = 300,
+export enum CommentLength {
+  Min = 50,
+  Max = 300,
 }
 
 export const MAX_NEARBY_OFFERS = 3;

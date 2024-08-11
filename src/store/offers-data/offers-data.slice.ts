@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const/const.ts';
-import sorting, {SortValue} from '../../const/sorting-const.ts';
+import Sorting, {SortValue} from '../../const/sorting-const.ts';
 import {CitiesCoordinatesKeys} from '../../const/city-points.ts';
 import {loadOffersAction} from './api-actions-offers.ts';
 import {OfferFromList} from '../../types/offer.ts';
@@ -18,7 +18,7 @@ const initialState: OffersData = {
   selectedCity: 'Paris',
   offers: [],
   idActiveOffer: '',
-  sortingType: sorting.base,
+  sortingType: Sorting.base,
   offersStatus: RequestStatus.Idle,
 };
 

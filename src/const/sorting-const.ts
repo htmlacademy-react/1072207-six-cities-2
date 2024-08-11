@@ -1,11 +1,11 @@
-const sorting = {
+const Sorting = {
   base: 'Popular',
   decrease: 'Price: high to low',
   increase: 'Price: low to high',
   rating: 'Top rated first',
 } as const;
 
-type SortKeys = keyof typeof sorting;
-export type SortValue = typeof sorting[SortKeys];
+type SortKeys = keyof typeof Sorting;
+export type SortValue = typeof Sorting[SortKeys];
 
-export default sorting;
+export default Sorting;

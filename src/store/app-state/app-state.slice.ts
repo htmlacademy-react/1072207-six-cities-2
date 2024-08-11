@@ -1,4 +1,4 @@
-import sorting, {SortValue} from '../../const/sorting-const.ts';
+import Sorting, {SortValue} from '../../const/sorting-const.ts';
 import {CitiesCoordinatesKeys} from '../../const/city-points.ts';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const/const.ts';
@@ -11,7 +11,7 @@ type AppState = {
 
 const initialState: AppState = {
   selectedCity: 'Paris',
-  sortingType: sorting.base,
+  sortingType: Sorting.base,
   idActiveOffer: '',
 };
 

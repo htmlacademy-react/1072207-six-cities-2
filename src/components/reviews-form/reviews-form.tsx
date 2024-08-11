@@ -9,7 +9,7 @@ import './styles.css';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {getStatusSendingComment} from '../../store/offer-page-data/offer-page-data.selectors.ts';
 import {RequestStatus} from '../../types/request-status.ts';
-import {RANGE_VALUES} from '../../pages/offer/const.ts';
+import {CommentLength} from '../../pages/offer/const.ts';
 
 function ReviewsForm() {
   const dispatch = useAppDispatch();
@@ -35,8 +35,8 @@ function ReviewsForm() {
   }, [statusCommentSending]);
 
   const isFormNotValid =
-    formState.review.length < RANGE_VALUES.MinLetters
-    || formState.review.length > RANGE_VALUES.MaxLetters
+    formState.review.length < CommentLength.Min
+    || formState.review.length > CommentLength.Max
     || formState.rating === 0;
 
   function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -80,8 +80,8 @@ function ReviewsForm() {
         placeholder="Tell how was your stay, what you like and what can be improved"
         value={formState.review}
         onChange={handleChange}
-        minLength={RANGE_VALUES.MinLetters}
-        maxLength={RANGE_VALUES.MaxLetters}
+        minLength={CommentLength.Min}
+        maxLength={CommentLength.Max}
         disabled={isPending}
       />
       <div className="reviews__button-wrapper">
@@ -89,7 +89,7 @@ function ReviewsForm() {
           To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span> and describe
           your stay with at least{' '}
-          <b className="reviews__text-amount">{RANGE_VALUES.MinLetters} characters</b>.
+          <b className="reviews__text-amount">{CommentLength.Min} characters</b>.
         </p>
 
         <button

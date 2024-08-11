@@ -1,7 +1,7 @@
 import {useState, useRef} from 'react';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import useOnClickOutside from '../../hooks/use-on-click-outside.ts';
-import sorting, {SortValue} from '../../const/sorting-const.ts';
+import Sorting, {SortValue} from '../../const/sorting-const.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {updateSortingPosition} from '../../store/app-state/app-state.slice.ts';
 
@@ -43,7 +43,7 @@ function Sorting() {
       </span>
       <ul className={classOpenForm}>
         {
-          Object.values(sorting).map((value) => (
+          Object.values(Sorting).map((value) => (
             <li
               key={value}
               className={cn('places__option',
