@@ -1,4 +1,4 @@
-import SortingForm from '../sorting/sorting.tsx';
+import SortingForm from '../sorting-form/sorting-form.tsx';
 import OffersList from '../offers-list/offers-list.tsx';
 import Map from '../map/map.tsx';
 import {OfferFromList} from '../../types/offer.ts';
