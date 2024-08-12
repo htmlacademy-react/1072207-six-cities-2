@@ -1,4 +1,4 @@
-import Sorting from '../sorting/sorting.tsx';
+import SortingForm from '../sorting/sorting.tsx';
 import OffersList from '../offers-list/offers-list.tsx';
 import Map from '../map/map.tsx';
 import {OfferFromList} from '../../types/offer.ts';
@@ -18,7 +18,7 @@ function ContainerOffers({relevantOffers}: ContainerOffers) {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{relevantOffers.length} places to stay in {selectedCityStore}</b>
-        <Sorting/>
+        <SortingForm/>
         <OffersList offers={relevantOffers} listType="cities"/>
       </section>
       <div className="cities__right-section">

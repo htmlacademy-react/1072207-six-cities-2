@@ -8,7 +8,7 @@ import {updateSortingPosition} from '../../store/app-state/app-state.slice.ts';
 import cn from 'classnames';
 import {getSortingType} from '../../store/app-state/app-state.selectors.ts';
 
-function Sorting() {
+function SortingForm() {
   const sortingPosition = useAppSelector(getSortingType);
 
   const [switcher, setSwitcher] = useState(false);
@@ -61,4 +61,4 @@ function Sorting() {
   );
 }
 
-export default Sorting;
+export default SortingForm;
